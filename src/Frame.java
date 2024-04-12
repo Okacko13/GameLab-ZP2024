@@ -5,7 +5,8 @@ import java.awt.event.ActionListener;
 
 public class Frame extends JFrame implements ActionListener {
 
-    private JLabel jLabel;
+    private JPanel buttons;
+    private JPanel titlePanel;
 
     private JButton[] gameOpener;
 
@@ -13,8 +14,9 @@ public class Frame extends JFrame implements ActionListener {
 
     public Frame() {
 
-        jLabel = new JLabel();
+        buttons = new JPanel();
         gameOpener = new JButton[3];
+        titlePanel = new JPanel();
 
         settupFrame();
 

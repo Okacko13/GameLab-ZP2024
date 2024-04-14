@@ -12,8 +12,11 @@ public class ResetButton extends JPanel {
         setBackground(new Color(118, 70, 215));
         setLayout(null);
 
+    }
 
 
+    public void setVisibility(Boolean visibility){
+        setVisible(visibility);
     }
 
 

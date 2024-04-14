@@ -11,7 +11,7 @@ public class ResetButton extends JPanel implements ActionListener {
 
         setSize(200,100);
         setLocation(50,50);
-        setBackground(new Color(118, 70, 215));
+        setBackground(new Color(86, 75, 21));
         setLayout(null);
 
     }

@@ -18,7 +18,7 @@ public class ResetButton extends JPanel implements ActionListener {
 
     public void setUpResetB(){
         resetToLobby = new JButton("back to lobby");
-        resetToLobby.setBounds(5,5,180,90);
+        resetToLobby.setBounds(5,5,190,90);
         resetToLobby.setIcon(null);
         resetToLobby.setBackground(new Color(215, 191, 70));
         resetToLobby.setBorderPainted(false);

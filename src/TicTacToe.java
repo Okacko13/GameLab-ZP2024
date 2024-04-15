@@ -3,7 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class TicTacToe implements ActionListener {
+public class TicTacToe extends JPanel implements ActionListener {
 
     private Random random;
     private final char player1 = 'X';

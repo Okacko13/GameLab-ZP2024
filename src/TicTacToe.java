@@ -17,6 +17,17 @@ public class TicTacToe {
     }
 
 
+    public void firstTurn(){
+
+        switch (random.nextInt(2)){
+            case 0:
+                onTurn = player1;
+            case 1:
+                onTurn = player2;
+        }
+
+    }
+
 
 
 }

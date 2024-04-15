@@ -1,7 +1,9 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class TicTacToe {
+public class TicTacToe implements ActionListener {
 
     private Random random;
     private final char player1 = 'X';
@@ -29,5 +31,8 @@ public class TicTacToe {
     }
 
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
+    }
 }

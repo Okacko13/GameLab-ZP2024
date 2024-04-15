@@ -29,7 +29,7 @@ public class Frame extends JFrame implements ActionListener {
         setIconImage(imageIcon.getImage());
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+        setLayout(null);
         setSize(750,750);
         setResizable(false);
 
@@ -58,7 +58,6 @@ public class Frame extends JFrame implements ActionListener {
         this.add(gameOpener[0]);
         this.add(gameOpener[1]);
         this.add(gameOpener[2]);
-
     }
 
     public void setTitlePanel(String text){

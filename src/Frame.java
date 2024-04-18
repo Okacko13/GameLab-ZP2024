@@ -49,6 +49,7 @@ public class Frame extends JFrame implements ActionListener {
             gameOpener[i].setFocusable(false);
             gameOpener[i].setBackground(new Color(255, 41, 41, 148));
             gameOpener[i].setForeground(new Color(0, 0, 0));
+            gameOpener[i].setFont(new Font("Times New Roman",Font.BOLD,20));
 
         }
 

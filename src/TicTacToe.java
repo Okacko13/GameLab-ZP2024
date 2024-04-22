@@ -37,5 +37,12 @@ public class TicTacToe extends JPanel implements ActionListener {
 
     }
 
-    public void xOnTurn()
+    public void xOnTurn(){
+
+    }
+
+    public void yOnTurn(){
+
+    }
+
 }

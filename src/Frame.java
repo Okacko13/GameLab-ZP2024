@@ -7,6 +7,8 @@ public class Frame extends JFrame implements ActionListener {
 
     private JPanel titlePanel;
 
+    private JLabel textField;
+
     private JButton[] gameOpener;
 
     private final ImageIcon imageIcon= new ImageIcon("LOBBY-LOGO.png");
@@ -47,6 +49,7 @@ public class Frame extends JFrame implements ActionListener {
             gameOpener[i].setBackground(new Color(255, 41, 41, 148));
             gameOpener[i].setForeground(new Color(0, 0, 0));
             gameOpener[i].setFont(new Font("Times New Roman",Font.BOLD,20));
+            gameOpener[i].setBorderPainted(false);
 
         }
 

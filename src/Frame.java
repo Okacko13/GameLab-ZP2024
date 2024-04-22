@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +36,9 @@ public class Frame extends JFrame implements ActionListener {
         getContentPane().setBackground(new Color(57, 57, 57));
 
         this.settupButtons();
+        this.setTitlePanel();
+        this.setTextField();
+
         setVisible(true);
 
     }
@@ -49,7 +53,8 @@ public class Frame extends JFrame implements ActionListener {
             gameOpener[i].setBackground(new Color(255, 41, 41, 148));
             gameOpener[i].setForeground(new Color(0, 0, 0));
             gameOpener[i].setFont(new Font("Times New Roman",Font.BOLD,20));
-            gameOpener[i].setBorderPainted(false);
+            gameOpener[i].setBorderPainted(true);
+            gameOpener[i].setBorder(BorderFactory.createLoweredBevelBorder());
 
         }
 
@@ -66,8 +71,27 @@ public class Frame extends JFrame implements ActionListener {
         this.add(gameOpener[2]);
     }
 
-    public void setTitlePanel(String text){
+    public void setTitlePanel(){
+        titlePanel = new JPanel();
 
+        titlePanel.setBounds(0,50,750,200);
+        titlePanel.setBackground(new Color(57, 57, 57));
+        titlePanel.setLayout(new BorderLayout());
+
+        this.add(titlePanel);
+    }
+
+    public void setTextField(){
+        textField = new JLabel();
+
+        textField.setBackground(new Color(57, 57, 57));
+        textField.setForeground(Color.WHITE);
+        textField.setFont(new Font("Times new roman",Font.PLAIN,60));
+        textField.setHorizontalAlignment(JLabel.CENTER);
+        textField.setText("Pick game");
+        textField.setOpaque(true);
+
+        titlePanel.add(textField);
     }
 
     @Override

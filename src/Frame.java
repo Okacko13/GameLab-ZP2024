@@ -5,16 +5,14 @@ import java.awt.event.ActionListener;
 
 public class Frame extends JFrame implements ActionListener {
 
-    private JPanel buttons;
     private JPanel titlePanel;
 
     private JButton[] gameOpener;
 
-    private ImageIcon imageIcon;
+    private final ImageIcon imageIcon= new ImageIcon("LOBBY-LOGO.png");
 
     public Frame() {
 
-        buttons = new JPanel();
         gameOpener = new JButton[3];
         titlePanel = new JPanel();
 
@@ -25,7 +23,6 @@ public class Frame extends JFrame implements ActionListener {
     public void settupFrame(){
 
         setTitle("Lobby");
-        imageIcon = new ImageIcon("LOBBY-LOGO.png");
         setIconImage(imageIcon.getImage());
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

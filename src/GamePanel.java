@@ -11,7 +11,14 @@ public class GamePanel extends JPanel {
         setBounds(5,5,740,740);
         setLayout(null);
         setBackground(Color.BLACK);
+        setVisible(false);
     }
+
+    public void setVisible(boolean bool){
+        setVisible(bool);
+    }
+
+
 
 
 }

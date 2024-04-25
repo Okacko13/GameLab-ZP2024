@@ -12,12 +12,18 @@ public class Frame extends JFrame implements ActionListener {
 
     private JButton[] gameOpener;
 
+    private GamePanel gamePanel;
+
     private final ImageIcon imageIcon= new ImageIcon("LOBBY-LOGO.png");
 
     public Frame() {
 
         gameOpener = new JButton[3];
         titlePanel = new JPanel();
+
+        gamePanel = new GamePanel();
+
+        this.add(gamePanel);
 
         settupFrame();
 
@@ -99,10 +105,12 @@ public class Frame extends JFrame implements ActionListener {
         if (gameOpener[0].equals(e.getSource())) {
             System.out.println("tictactoe");
             setTitle("TicTacToe");
+            gamePanel.setVisible(true);
 
         } else if(gameOpener[1].equals(e.getSource())){
             System.out.println("mastermind");
             setTitle("Mastermind");
+            gamePanel.setVisible(false);
 
         } else if(gameOpener[2].equals(e.getSource())){
             System.out.println("quoridors");

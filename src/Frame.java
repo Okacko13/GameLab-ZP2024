@@ -100,6 +100,12 @@ public class Frame extends JFrame implements ActionListener {
         titlePanel.add(textField);
     }
 
+    public void hideGameOButtons(){
+        for(int i = 0; i < gameOpener.length; i++){
+            gameOpener[i].setVisible(false);
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (gameOpener[0].equals(e.getSource())) {
@@ -115,6 +121,7 @@ public class Frame extends JFrame implements ActionListener {
         } else if(gameOpener[2].equals(e.getSource())){
             System.out.println("quoridors");
             setTitle("Quoridor");
+            gamePanel.setVisible(true);
 
         }
     }

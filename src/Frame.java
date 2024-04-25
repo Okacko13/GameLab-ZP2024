@@ -106,6 +106,11 @@ public class Frame extends JFrame implements ActionListener {
         }
     }
 
+    public void startGame(){
+        gamePanel.setVisible(true);
+        hideGameOButtons();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (gameOpener[0].equals(e.getSource())) {

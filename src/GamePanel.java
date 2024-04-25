@@ -8,13 +8,13 @@ public class GamePanel extends JPanel {
     }
 
     public void setUpPanel(){
-        setBounds(5,5,740,740);
+        setBounds(0,0,750,750);
         setLayout(null);
         setBackground(Color.BLACK);
         setVisible(false);
     }
 
-    public void setVisible(boolean bool){
+    public void setVisibility(boolean bool){
         setVisible(bool);
     }
 

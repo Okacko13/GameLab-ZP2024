@@ -21,6 +21,7 @@ public class TicTacToe extends JPanel implements ActionListener {
     }
 
 
+
     public void firstTurn(){
 
         switch (random.nextInt(2)){
@@ -145,6 +146,17 @@ public class TicTacToe extends JPanel implements ActionListener {
 
             }
 
+        }
+
+    }
+
+    public void newGame(){
+
+        for(int  i = 0; i < buttons.length ; i++){
+
+            buttons[i].setText("");
+            buttons[i].setFocusable(true);
+            buttons[i].setBackground(Color.GRAY);
         }
 
     }

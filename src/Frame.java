@@ -116,17 +116,17 @@ public class Frame extends JFrame implements ActionListener {
         if (gameOpener[0].equals(e.getSource())) {
             System.out.println("tictactoe");
             setTitle("TicTacToe");
-            gamePanel.setVisible(true);
+            startGame();
 
         } else if(gameOpener[1].equals(e.getSource())){
             System.out.println("mastermind");
             setTitle("Mastermind");
-            gamePanel.setVisible(false);
+            startGame();
 
         } else if(gameOpener[2].equals(e.getSource())){
             System.out.println("quoridors");
             setTitle("Quoridor");
-            gamePanel.setVisible(true);
+            startGame();
 
         }
     }

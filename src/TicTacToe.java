@@ -32,51 +32,60 @@ public class TicTacToe extends JPanel implements ActionListener {
 
     }
 
-    public void check(){
+    public String check(){
 
         for (int a = 0; a < 8; a++) {
             String[] array = new String[3];
+            int[] indexes = new int[3];
 
             switch (a) {
                 case 0:
                     array[0]= buttons[0].getText();
                     array[1]= buttons[1].getText();
                     array[2]= buttons[2].getText();
+                    indexes = new int[]{0,1,2};
                     break;
                 case 1:
                     array[0]= buttons[3].getText();
                     array[1]= buttons[4].getText();
                     array[2]= buttons[5].getText();
+                    indexes = new int[]{3,4,5};
                     break;
                 case 2:
                     array[0]= buttons[6].getText();
                     array[1]= buttons[7].getText();
                     array[2]= buttons[8].getText();
+                    indexes = new int[]{6,7,8};
                     break;
                 case 3:
                     array[0]= buttons[0].getText();
                     array[1]= buttons[3].getText();
                     array[2]= buttons[6].getText();
+                    indexes = new int[]{0,3,6};
                     break;
                 case 4:
                     array[0]= buttons[1].getText();
                     array[1]= buttons[4].getText();
                     array[2]= buttons[7].getText();
+                    indexes = new int[]{1,4,7};
                     break;
                 case 5:
                     array[0]= buttons[2].getText();
                     array[1]= buttons[5].getText();
                     array[2]= buttons[8].getText();
+                    indexes = new int[]{2,5,8};
                     break;
                 case 6:
                     array[0]= buttons[0].getText();
                     array[1]= buttons[4].getText();
                     array[2]= buttons[8].getText();
+                    indexes = new int[]{0,4,8};
                     break;
                 case 7:
                     array[0]= buttons[2].getText();
                     array[1]= buttons[4].getText();
                     array[2]= buttons[6].getText();
+                    indexes = new int[]{2,4,6};
                     break;
                 default:
 
@@ -84,15 +93,23 @@ public class TicTacToe extends JPanel implements ActionListener {
 
             String line = String.valueOf(array);
 
-            if (line.equals("XXX")) {        //For X winner
+            if (line.equals("XXX")) {
 
-            } else if (line.equals("OOO")) {        // For O winner
+                win(indexes[0],indexes[1],indexes[2]);
+                return "X wins";
+
+            } else if (line.equals("OOO")) {
+
+                win(indexes[0],indexes[1],indexes[2]);
+                return "Y wins";
 
             }
         }
+
+        return null;
     }
 
-    public void xWin(){
+    public void win(int numOne,int numTwo,int numThree){
 
     }
 

@@ -16,8 +16,24 @@ public class TicTacToe extends JPanel implements ActionListener {
 
     public TicTacToe() {
 
+        initializeButtons();
+        firstTurn();
+
+    }
+
+    public void initializeButtons(){
+
         buttons = new JButton[9];
 
+        for(int i = 0; i< buttons.length;i++){
+
+            buttons[i] = new JButton();
+            buttons[i].setBackground(Color.GRAY);
+            buttons[i].setForeground(Color.BLACK);
+            buttons[i].setBorder(BorderFactory.createLineBorder(Color.BLACK,3));
+            buttons[i].setVisible(true);
+
+        }
     }
 
 

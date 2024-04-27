@@ -18,6 +18,14 @@ public class GamePanel extends JPanel {
         setVisible(bool);
     }
 
+    public void startTicTacToe(){
+        TicTacToe ticTacToe = new TicTacToe();
+
+        this.setLayout(new GridLayout(3,3));
+        add(ticTacToe);
+
+    }
+
 
 
 

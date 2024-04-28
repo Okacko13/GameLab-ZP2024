@@ -106,10 +106,6 @@ public class Frame extends JFrame implements ActionListener {
         }
     }
 
-    public void startGame(){
-        gamePanel.setVisible(true);
-        hideGameOButtons();
-    }
 
     public void startTicTacToe(){
         gamePanel.setVisible(true);
@@ -120,19 +116,14 @@ public class Frame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (gameOpener[0].equals(e.getSource())) {
-            System.out.println("tictactoe");
             setTitle("TicTacToe");
             startTicTacToe();
 
         } else if(gameOpener[1].equals(e.getSource())){
-            System.out.println("mastermind");
             setTitle("Mastermind");
-            startGame();
 
         } else if(gameOpener[2].equals(e.getSource())){
-            System.out.println("quoridors");
             setTitle("Quoridor");
-            startGame();
 
         }
     }

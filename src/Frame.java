@@ -111,12 +111,18 @@ public class Frame extends JFrame implements ActionListener {
         hideGameOButtons();
     }
 
+    public void startTicTacToe(){
+        gamePanel.setVisible(true);
+        gamePanel.startTicTacToe();
+        hideGameOButtons();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (gameOpener[0].equals(e.getSource())) {
             System.out.println("tictactoe");
             setTitle("TicTacToe");
-            startGame();
+            startTicTacToe();
 
         } else if(gameOpener[1].equals(e.getSource())){
             System.out.println("mastermind");

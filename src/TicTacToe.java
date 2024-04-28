@@ -10,14 +10,19 @@ public class TicTacToe extends JPanel implements ActionListener {
     private Random random = new Random();
     private final char player1 = 'X';
     private final char player2 = 'O';
-    private char onTurn;
+    private char onTurn = player2;
 
     private JButton[] buttons;
 
     public TicTacToe() {
 
+        setBounds(0,0,750,750);
+        setLayout(new GridLayout(3,3));
+
         initializeButtons();
         firstTurn();
+
+        setVisible(true);
 
     }
 
@@ -28,23 +33,23 @@ public class TicTacToe extends JPanel implements ActionListener {
         for(int i = 0; i< buttons.length;i++){
 
             buttons[i] = new JButton();
-            buttons[i].setBackground(Color.GRAY);
-            buttons[i].setForeground(Color.BLACK);
             buttons[i].setBorder(BorderFactory.createLineBorder(Color.BLACK,3));
             buttons[i].setVisible(true);
-
+            buttons[i].addActionListener(this);
+            buttons[i].setFocusable(false);
+            buttons[i].setFont(new Font("Arial",Font.BOLD,100));
+            add(buttons[i]);
         }
+
     }
 
 
 
     public void firstTurn(){
+        int generated = random.nextInt(2);
 
-        switch (random.nextInt(2)){
-            case 0:
-                onTurn = player1;
-            case 1:
-                onTurn = player2;
+        if(generated== 1){
+            onTurn = player1;
         }
 
     }
@@ -108,14 +113,12 @@ public class TicTacToe extends JPanel implements ActionListener {
 
             }
 
-            String line = String.valueOf(array);
-
-            if (line.equals("XXX")) {
+            if (array[0].equals("X") && array[1].equals("X") && array[2].equals("X")) {
 
                 win(indexes[0],indexes[1],indexes[2]);
                 return "X wins";
 
-            } else if (line.equals("OOO")) {
+            } else if (array[0].equals("O") && array[1].equals("O") && array[2].equals("O")) {
 
                 win(indexes[0],indexes[1],indexes[2]);
                 return "Y wins";
@@ -152,10 +155,12 @@ public class TicTacToe extends JPanel implements ActionListener {
                         buttons[i].setForeground(Color.BLUE);
                         onTurn = player2;
                         check();
+                        break;
                     } else {
                         buttons[i].setForeground(Color.RED);
                         onTurn = player1;
                         check();
+                        break;
                     }
 
                 }

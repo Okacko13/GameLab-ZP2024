@@ -14,7 +14,6 @@ public class TicTacToe extends JPanel implements ActionListener {
     private char onTurn = player2;
     private JButton[][] buttons;
     private int turns;
-
     public TicTacToe() {
 
         setBounds(0,0,750,750);
@@ -28,7 +27,6 @@ public class TicTacToe extends JPanel implements ActionListener {
     }
 
     public void initializeButtons(){
-
         buttons = new JButton[3][3];
 
         for(int i = 0; i< buttons.length;i++){
@@ -42,9 +40,7 @@ public class TicTacToe extends JPanel implements ActionListener {
                 buttons[i][j].setFont(new Font("Arial",Font.BOLD,100));
                 add(buttons[i][j]);
             }
-
         }
-
     }
 
 
@@ -59,105 +55,33 @@ public class TicTacToe extends JPanel implements ActionListener {
     }
 
     public String check(){
-        /*
-        for (int a = 0; a < 8; a++) {
-            String[] array = new String[3];
-            int[] indexes = new int[3];
-
-            switch (a) {
-                case 0:
-                    array[0]= buttons[0].getText();
-                    array[1]= buttons[1].getText();
-                    array[2]= buttons[2].getText();
-                    indexes = new int[]{0,1,2};
-                    break;
-                case 1:
-                    array[0]= buttons[3].getText();
-                    array[1]= buttons[4].getText();
-                    array[2]= buttons[5].getText();
-                    indexes = new int[]{3,4,5};
-                    break;
-                case 2:
-                    array[0]= buttons[6].getText();
-                    array[1]= buttons[7].getText();
-                    array[2]= buttons[8].getText();
-                    indexes = new int[]{6,7,8};
-                    break;
-                case 3:
-                    array[0]= buttons[0].getText();
-                    array[1]= buttons[3].getText();
-                    array[2]= buttons[6].getText();
-                    indexes = new int[]{0,3,6};
-                    break;
-                case 4:
-                    array[0]= buttons[1].getText();
-                    array[1]= buttons[4].getText();
-                    array[2]= buttons[7].getText();
-                    indexes = new int[]{1,4,7};
-                    break;
-                case 5:
-                    array[0]= buttons[2].getText();
-                    array[1]= buttons[5].getText();
-                    array[2]= buttons[8].getText();
-                    indexes = new int[]{2,5,8};
-                    break;
-                case 6:
-                    array[0]= buttons[0].getText();
-                    array[1]= buttons[4].getText();
-                    array[2]= buttons[8].getText();
-                    indexes = new int[]{0,4,8};
-                    break;
-                case 7:
-                    array[0]= buttons[2].getText();
-                    array[1]= buttons[4].getText();
-                    array[2]= buttons[6].getText();
-                    indexes = new int[]{2,4,6};
-                    break;
-                default:
-
-            }
-
-            if (array[0].equals("X") && array[1].equals("X") && array[2].equals("X")) {
-
-                win(indexes[0],indexes[1],indexes[2]);
-                return "X wins";
-
-            } else if (array[0].equals("O") && array[1].equals("O") && array[2].equals("O")) {
-
-                win(indexes[0],indexes[1],indexes[2]);
-                return "Y wins";
-
-            }
-        }
-
-        return null;
-         */
+        //hotizontal
         for (int r = 0; r < 3; r++) {
             if (buttons[r][0].getText().equals("")) continue;
 
             if (buttons[r][0].getText().equals(buttons[r][1].getText()) && buttons[r][1].getText().equals(buttons[r][2].getText())) {
-
+                win(r,0,r,1,r,2);
+                return buttons[r][0].getText() + " wins";
             }
         }
-
+        //vertical
         for (int c = 0; c < 3; c++) {
             if (buttons[0][c].getText().equals("")) continue;
 
             if (buttons[0][c].getText().equals(buttons[1][c].getText()) && buttons[1][c].getText().equals(buttons[2][c].getText())) {
-
+                win(0,c,1,c,2,c);
+                return buttons[0][c].getText() + " wins";
             }
         }
-
-        if (    buttons[0][0].getText().equals(buttons[1][1].getText()) &&
-                buttons[1][1].getText().equals(buttons[2][2].getText()) &&
-                !buttons[0][0].getText().equals("")) {
-
+        //diagonal
+        if (    buttons[0][0].getText().equals(buttons[1][1].getText()) && buttons[1][1].getText().equals(buttons[2][2].getText()) && !buttons[0][0].getText().equals("")) {
+            win(0,0,1,1,2,2);
+            return buttons[0][0].getText() + " wins";
         }
-
-        if (buttons[0][2].getText().equals(buttons[1][1].getText()) &&
-                buttons[1][1].getText().equals(buttons[2][0].getText()) &&
-                !buttons[0][2].getText().equals("")) {
-
+        //diagonal
+        if (buttons[0][2].getText().equals(buttons[1][1].getText()) && buttons[1][1].getText().equals(buttons[2][0].getText()) && !buttons[0][2].getText().equals("")) {
+            win(0,2,1,1,2,0);
+            return buttons[0][2].getText() + " wins";
         }
 
         if (turns == 9) {
@@ -168,13 +92,13 @@ public class TicTacToe extends JPanel implements ActionListener {
             }
 
         }
-
+        return null;
     }
 
-    public void win(int numOne,int numTwo,int numThree){
-        buttons[numOne].setBackground(Color.GREEN);
-        buttons[numTwo].setBackground(Color.GREEN);
-        buttons[numThree].setBackground(Color.GREEN);
+    public void win(int rowOne,int colOne,int rowTwo,int colTwo,int rowThree,int colThree){
+        buttons[rowOne][colOne].setBackground(Color.GREEN);
+        buttons[rowTwo][colTwo].setBackground(Color.GREEN);
+        buttons[rowThree][colThree].setBackground(Color.GREEN);
 
         for(int i = 0; i < buttons.length; i++){
             for (int j = 0; j < buttons.length; j++) {

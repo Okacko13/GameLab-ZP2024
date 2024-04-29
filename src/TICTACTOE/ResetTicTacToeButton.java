@@ -8,6 +8,8 @@ public class ResetTicTacToeButton extends JPanel implements ActionListener {
 
     private JButton resetButton;
 
+    private TicTacToe game;
+
     public ResetTicTacToeButton() {
     }
 

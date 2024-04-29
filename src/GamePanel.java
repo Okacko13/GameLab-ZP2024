@@ -24,7 +24,7 @@ public class GamePanel extends JPanel {
         TicTacToe ticTacToe = new TicTacToe();
 
         this.setLayout(new BorderLayout());
-        add(ticTacToe);
+        add(ticTacToe,BorderLayout.CENTER);
 
     }
 

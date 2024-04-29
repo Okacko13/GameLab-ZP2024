@@ -22,17 +22,18 @@ public class ResetTicTacToeButton extends JPanel implements ActionListener {
     public void buttonInitialize(){
         resetButton = new JButton("RESET GAME");
         resetButton.setFont(new Font("Arial", Font.BOLD,35));
-        resetButton.setBounds(10,10,185,85);
+        resetButton.setFocusable(false);
         resetButton.setBackground(Color.DARK_GRAY);
+        resetButton.setBorder(null);
         resetButton.setForeground(Color.WHITE);
+        resetButton.addActionListener(this);
 
 
     }
 
     public void initializePanel(){
         this.setBackground(Color.BLACK);
-        this.setBounds(0,0,200,100);
-        this.setLayout(null);
+        this.setLayout(new BorderLayout());
 
     }
 

@@ -196,6 +196,7 @@ public class TicTacToe extends JPanel implements ActionListener {
                     if(buttons[i][j].getText().equals("")){
 
                         buttons[i][j].setText(String.valueOf(onTurn));
+                        turns++;
 
                         if(onTurn == player1){
 
@@ -228,6 +229,12 @@ public class TicTacToe extends JPanel implements ActionListener {
 
         }
 
+    }
+
+    public void setTie(JButton button){
+        button.setForeground(Color.WHITE);
+        button.setBackground(Color.gray);
+        button.setEnabled(false);
     }
 
 

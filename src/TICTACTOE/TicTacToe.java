@@ -13,6 +13,7 @@ public class TicTacToe extends JPanel implements ActionListener {
     private final char player2 = 'O';
     private char onTurn = player2;
     private JButton[][] buttons;
+    private int turns;
 
     public TicTacToe() {
 

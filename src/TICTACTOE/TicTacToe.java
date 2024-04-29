@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class TicTacToe extends JPanel implements ActionListener {
@@ -14,7 +13,7 @@ public class TicTacToe extends JPanel implements ActionListener {
     private final char player2 = 'O';
     private char onTurn = player2;
 
-    private JButton[] buttons;
+    private JButton[][] buttons;
 
     public TicTacToe() {
 
@@ -30,17 +29,20 @@ public class TicTacToe extends JPanel implements ActionListener {
 
     public void initializeButtons(){
 
-        buttons = new JButton[9];
+        buttons = new JButton[3][3];
 
         for(int i = 0; i< buttons.length;i++){
+            for (int j = 0; j < buttons.length; j++) {
+                buttons[i][j] = new JButton();
+                buttons[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK,3));
+                buttons[i][j].setVisible(true);
+                buttons[i][j].setBackground(Color.GRAY);
+                buttons[i][j].addActionListener(this);
+                buttons[i][j].setFocusable(false);
+                buttons[i][j].setFont(new Font("Arial",Font.BOLD,100));
+                add(buttons[i][j]);
+            }
 
-            buttons[i] = new JButton();
-            buttons[i].setBorder(BorderFactory.createLineBorder(Color.BLACK,3));
-            buttons[i].setVisible(true);
-            buttons[i].addActionListener(this);
-            buttons[i].setFocusable(false);
-            buttons[i].setFont(new Font("Arial",Font.BOLD,100));
-            add(buttons[i]);
         }
 
     }
@@ -137,7 +139,10 @@ public class TicTacToe extends JPanel implements ActionListener {
         buttons[numThree].setBackground(Color.GREEN);
 
         for(int i = 0; i < buttons.length; i++){
-            buttons[i].setEnabled(false);
+            for (int j = 0; j < buttons.length; j++) {
+                buttons[i][j].setEnabled(false);
+            }
+
         }
     }
 
@@ -147,27 +152,33 @@ public class TicTacToe extends JPanel implements ActionListener {
 
         for(int i = 0; i < buttons.length; i++){
 
-            if(buttons[i]== e.getSource()){
+            for (int j = 0; j < buttons.length; j++) {
+                if(buttons[i][j] == e.getSource()){
 
-                if(buttons[i].getText().equals("")){
+                    if(buttons[i][j].getText().equals("")){
 
-                    buttons[i].setText(String.valueOf(onTurn));
+                        buttons[i][j].setText(String.valueOf(onTurn));
 
-                    if(onTurn == player1){
-                        buttons[i].setForeground(Color.BLUE);
-                        onTurn = player2;
-                        check();
-                        break;
-                    } else {
-                        buttons[i].setForeground(Color.RED);
-                        onTurn = player1;
-                        check();
-                        break;
+                        if(onTurn == player1){
+
+                            buttons[i][j].setForeground(Color.BLUE);
+                            onTurn = player2;
+                            check();
+                            break;
+
+                        } else {
+
+                            buttons[i][j].setForeground(Color.RED);
+                            onTurn = player1;
+                            check();
+                            break;
+                        }
+
                     }
 
                 }
-
             }
+
 
         }
 
@@ -176,10 +187,12 @@ public class TicTacToe extends JPanel implements ActionListener {
     public void newGame(){
 
         for(int  i = 0; i < buttons.length ; i++){
+            for (int j = 0; j < buttons.length; j++) {
+                buttons[i][j].setText("");
+                buttons[i][j].setFocusable(true);
+                buttons[i][j].setBackground(Color.GRAY);
+            }
 
-            buttons[i].setText("");
-            buttons[i].setFocusable(true);
-            buttons[i].setBackground(Color.GRAY);
         }
 
     }

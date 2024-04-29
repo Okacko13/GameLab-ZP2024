@@ -100,9 +100,9 @@ public class Frame extends JFrame implements ActionListener {
         titlePanel.add(textField);
     }
 
-    public void hideGameOButtons(){
+    public void hideGameOButtons(boolean bool){
         for(int i = 0; i < gameOpener.length; i++){
-            gameOpener[i].setVisible(false);
+            gameOpener[i].setVisible(bool);
         }
     }
 
@@ -110,7 +110,7 @@ public class Frame extends JFrame implements ActionListener {
     public void startTicTacToe(){
         gamePanel.setVisible(true);
         gamePanel.startTicTacToe();
-        hideGameOButtons();
+        hideGameOButtons(false);
     }
 
     @Override

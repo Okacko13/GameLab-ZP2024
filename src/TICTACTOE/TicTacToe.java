@@ -12,7 +12,6 @@ public class TicTacToe extends JPanel implements ActionListener {
     private final char player1 = 'X';
     private final char player2 = 'O';
     private char onTurn = player2;
-
     private JButton[][] buttons;
 
     public TicTacToe() {
@@ -59,7 +58,7 @@ public class TicTacToe extends JPanel implements ActionListener {
     }
 
     public String check(){
-
+        /*
         for (int a = 0; a < 8; a++) {
             String[] array = new String[3];
             int[] indexes = new int[3];
@@ -131,6 +130,44 @@ public class TicTacToe extends JPanel implements ActionListener {
         }
 
         return null;
+         */
+        for (int r = 0; r < 3; r++) {
+            if (buttons[r][0].getText().equals("")) continue;
+
+            if (buttons[r][0].getText().equals(buttons[r][1].getText()) && buttons[r][1].getText().equals(buttons[r][2].getText())) {
+
+            }
+        }
+
+        for (int c = 0; c < 3; c++) {
+            if (buttons[0][c].getText().equals("")) continue;
+
+            if (buttons[0][c].getText().equals(buttons[1][c].getText()) && buttons[1][c].getText().equals(buttons[2][c].getText())) {
+
+            }
+        }
+
+        if (    buttons[0][0].getText().equals(buttons[1][1].getText()) &&
+                buttons[1][1].getText().equals(buttons[2][2].getText()) &&
+                !buttons[0][0].getText().equals("")) {
+
+        }
+
+        if (buttons[0][2].getText().equals(buttons[1][1].getText()) &&
+                buttons[1][1].getText().equals(buttons[2][0].getText()) &&
+                !buttons[0][2].getText().equals("")) {
+
+        }
+
+        if (turns == 9) {
+            for (int r = 0; r < 3; r++) {
+                for (int c = 0; c < 3; c++) {
+                    setTie(buttons[r][c]);
+                }
+            }
+
+        }
+
     }
 
     public void win(int numOne,int numTwo,int numThree){
@@ -151,8 +188,8 @@ public class TicTacToe extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         for(int i = 0; i < buttons.length; i++){
-
             for (int j = 0; j < buttons.length; j++) {
+
                 if(buttons[i][j] == e.getSource()){
 
                     if(buttons[i][j].getText().equals("")){
@@ -173,15 +210,10 @@ public class TicTacToe extends JPanel implements ActionListener {
                             check();
                             break;
                         }
-
                     }
-
                 }
             }
-
-
         }
-
     }
 
     public void newGame(){

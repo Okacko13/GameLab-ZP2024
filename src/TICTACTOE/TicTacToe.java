@@ -147,11 +147,12 @@ public class TicTacToe extends JPanel implements ActionListener {
         for(int  i = 0; i < buttons.length ; i++){
             for (int j = 0; j < buttons.length; j++) {
                 buttons[i][j].setText("");
-                buttons[i][j].setFocusable(true);
+                buttons[i][j].setEnabled(true);
                 buttons[i][j].setBackground(Color.GRAY);
             }
 
         }
+        turns = 0;
 
     }
 

@@ -1,17 +1,18 @@
+package FRAME_COMPONENTS;
+
 import TICTACTOE.TicTacToe;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel {
-
     public GamePanel() {
         setUpPanel();
     }
 
     public void setUpPanel(){
-        setBounds(0,0,750,750);
-        setLayout(null);
+        setBounds(0,150,750,600);
+        setLayout(new BorderLayout());
         setBackground(Color.BLACK);
         setVisible(false);
     }
@@ -20,15 +21,10 @@ public class GamePanel extends JPanel {
         setVisible(bool);
     }
 
-    public void startTicTacToe(){
-        TicTacToe ticTacToe = new TicTacToe();
+    public void startTicTacToe(TicTacToe ticTacToe){
 
-        this.setLayout(new BorderLayout());
-        add(ticTacToe,BorderLayout.CENTER);
+        add(ticTacToe);
 
     }
-
-
-
 
 }

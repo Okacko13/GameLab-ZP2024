@@ -11,30 +11,40 @@ public class ResetTicTacToeButton extends JPanel implements ActionListener {
 
     private TicTacToe game;
 
-    public ResetTicTacToeButton(TicTacToe game) {
-        this.game = game;
+    public ResetTicTacToeButton() {
+
         buttonInitialize();
         initializePanel();
-        add(resetButton);
         setVisible(true);
+
     }
 
     public void buttonInitialize(){
-        resetButton = new JButton("RESET GAME");
-        resetButton.setFont(new Font("Arial", Font.BOLD,35));
+        resetButton = new JButton("RESET");
+
+        resetButton.setBounds(10,10,180,130);
+        resetButton.setFont(new Font("Arial", Font.BOLD,40));
         resetButton.setFocusable(false);
-        resetButton.setBackground(Color.DARK_GRAY);
+        resetButton.setBackground(new Color(114, 0, 255, 255));
         resetButton.setBorder(null);
         resetButton.setForeground(Color.WHITE);
         resetButton.addActionListener(this);
+        resetButton.setVisible(true);
 
+        add(resetButton);
 
     }
 
     public void initializePanel(){
-        this.setBackground(Color.BLACK);
-        this.setLayout(new BorderLayout());
+        this.setSize(200,150);
+        setLocation(200,0);
+        this.setBackground(new Color(72, 67, 66));
+        this.setLayout(null);
 
+    }
+
+    public void setTicTacToe(TicTacToe ttt){
+        this.game = ttt;
     }
 
     @Override

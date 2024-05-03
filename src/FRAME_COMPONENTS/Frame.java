@@ -1,3 +1,8 @@
+package FRAME_COMPONENTS;
+
+import TICTACTOE.ResetTicTacToeButton;
+import TICTACTOE.TicTacToe;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
@@ -7,14 +12,11 @@ import java.awt.event.ActionListener;
 public class Frame extends JFrame implements ActionListener {
 
     private JPanel titlePanel;
-
     private JLabel textField;
-
     private JButton[] gameOpener;
-
     private GamePanel gamePanel;
-
-    private final ImageIcon imageIcon= new ImageIcon("LOBBY-LOGO.png");
+    private FramePanel framePanel;
+    private final ImageIcon imageIcon= new ImageIcon("OK-logo.png");
 
     public Frame() {
 
@@ -25,8 +27,8 @@ public class Frame extends JFrame implements ActionListener {
 
         this.add(gamePanel);
 
+        setUpFramePanel();
         settupFrame();
-
     }
 
     public void settupFrame(){
@@ -47,6 +49,10 @@ public class Frame extends JFrame implements ActionListener {
 
         setVisible(true);
 
+    }
+    public void setUpFramePanel(){
+        framePanel = new FramePanel(new GamePanel(),new TextPanel(),new ResetTicTacToeButton(),new ResetButton(framePanel,this));
+        add(framePanel);
     }
 
     public void settupButtons(){
@@ -78,8 +84,8 @@ public class Frame extends JFrame implements ActionListener {
     }
 
     public void setTitlePanel(){
-        titlePanel = new JPanel();
 
+        titlePanel = new JPanel();
         titlePanel.setBounds(0,50,750,200);
         titlePanel.setBackground(new Color(57, 57, 57));
         titlePanel.setLayout(new BorderLayout());
@@ -88,39 +94,37 @@ public class Frame extends JFrame implements ActionListener {
     }
 
     public void setTextField(){
-        textField = new JLabel();
-
+        textField = new JLabel("Pick game");
         textField.setBackground(new Color(57, 57, 57));
         textField.setForeground(Color.WHITE);
-        textField.setFont(new Font("Times new roman",Font.PLAIN,60));
+        textField.setFont(new Font("Times new roman",Font.PLAIN,90));
         textField.setHorizontalAlignment(JLabel.CENTER);
-        textField.setText("Pick game");
         textField.setOpaque(true);
 
         titlePanel.add(textField);
     }
 
-    public void hideGameOButtons(boolean bool){
+    public void enableGameOButtons(boolean bool){
         for(int i = 0; i < gameOpener.length; i++){
             gameOpener[i].setVisible(bool);
         }
     }
 
-
-    public void startTicTacToe(){
-        gamePanel.setVisible(true);
-        gamePanel.startTicTacToe();
-        hideGameOButtons(false);
+    public void startTicTacToeFramePanel(){
+        framePanel.setVisibility(true);
+        framePanel.startTicTacToe(new TicTacToe(new TextPanel()));
+        enableGameOButtons(false);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (gameOpener[0].equals(e.getSource())) {
             setTitle("TicTacToe");
-            startTicTacToe();
+            startTicTacToeFramePanel();
 
         } else if(gameOpener[1].equals(e.getSource())){
             setTitle("Mastermind");
+
 
         } else if(gameOpener[2].equals(e.getSource())){
             setTitle("Quoridor");

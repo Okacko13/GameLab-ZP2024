@@ -1,4 +1,5 @@
 package TICTACTOE;
+import FRAME_COMPONENTS.TextPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,14 +8,17 @@ import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class TicTacToe extends JPanel implements ActionListener {
-
     private Random random = new Random();
     private final char player1 = 'X';
     private final char player2 = 'O';
     private char onTurn = player2;
     private JButton[][] buttons;
     private int turns;
-    public TicTacToe() {
+    private TextPanel textPanel;
+
+    public TicTacToe(TextPanel textPanel) {
+
+        this.textPanel = textPanel;
 
         setBounds(0,0,750,750);
         setLayout(new GridLayout(3,3));
@@ -43,54 +47,56 @@ public class TicTacToe extends JPanel implements ActionListener {
         }
     }
 
-
-
     public void firstTurn(){
         int generated = random.nextInt(2);
 
         if(generated== 1){
             onTurn = player1;
+            textPanel.setTextOnPanel(player1 + " is on turn");
+        } else{
+            textPanel.setTextOnPanel(player2 + " is on turn");
         }
 
     }
 
     public String check(){
-        //hotizontal
-        for (int r = 0; r < 3; r++) {
-            if (buttons[r][0].getText().equals("")) continue;
-
-            if (buttons[r][0].getText().equals(buttons[r][1].getText()) && buttons[r][1].getText().equals(buttons[r][2].getText())) {
-                win(r,0,r,1,r,2);
-                return buttons[r][0].getText() + " wins";
-            }
-        }
-        //vertical
-        for (int c = 0; c < 3; c++) {
-            if (buttons[0][c].getText().equals("")) continue;
-
-            if (buttons[0][c].getText().equals(buttons[1][c].getText()) && buttons[1][c].getText().equals(buttons[2][c].getText())) {
-                win(0,c,1,c,2,c);
-                return buttons[0][c].getText() + " wins";
-            }
-        }
-        //diagonal
-        if (    buttons[0][0].getText().equals(buttons[1][1].getText()) && buttons[1][1].getText().equals(buttons[2][2].getText()) && !buttons[0][0].getText().equals("")) {
-            win(0,0,1,1,2,2);
-            return buttons[0][0].getText() + " wins";
-        }
-        //diagonal
-        if (buttons[0][2].getText().equals(buttons[1][1].getText()) && buttons[1][1].getText().equals(buttons[2][0].getText()) && !buttons[0][2].getText().equals("")) {
-            win(0,2,1,1,2,0);
-            return buttons[0][2].getText() + " wins";
-        }
-
-        if (turns == 9) {
+        if(turns > 4){
+            //hotizontal
             for (int r = 0; r < 3; r++) {
-                for (int c = 0; c < 3; c++) {
-                    setTie(buttons[r][c]);
+                if (buttons[r][0].getText().equals("")) continue;
+
+                if (buttons[r][0].getText().equals(buttons[r][1].getText()) && buttons[r][1].getText().equals(buttons[r][2].getText())) {
+                    win(r,0,r,1,r,2);
+                    return buttons[r][0].getText() + " is winner";
                 }
             }
+            //vertical
+            for (int c = 0; c < 3; c++) {
+                if (buttons[0][c].getText().equals("")) continue;
 
+                if (buttons[0][c].getText().equals(buttons[1][c].getText()) && buttons[1][c].getText().equals(buttons[2][c].getText())) {
+                    win(0,c,1,c,2,c);
+                    return buttons[0][c].getText() + " is winner";
+                }
+            }
+            //diagonal
+            if (    buttons[0][0].getText().equals(buttons[1][1].getText()) && buttons[1][1].getText().equals(buttons[2][2].getText()) && !buttons[0][0].getText().equals("")) {
+                win(0,0,1,1,2,2);
+                return buttons[0][0].getText() + " is winner";
+            }
+            //diagonal
+            if (buttons[0][2].getText().equals(buttons[1][1].getText()) && buttons[1][1].getText().equals(buttons[2][0].getText()) && !buttons[0][2].getText().equals("")) {
+                win(0,2,1,1,2,0);
+                return buttons[0][2].getText() + " is winner";
+            }
+
+            if (turns == 9) {
+                for (int r = 0; r < 3; r++) {
+                    for (int c = 0; c < 3; c++) {
+                        setTie(buttons[r][c]);
+                    }
+                }
+            }
         }
         return null;
     }
@@ -108,7 +114,6 @@ public class TicTacToe extends JPanel implements ActionListener {
         }
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -121,21 +126,22 @@ public class TicTacToe extends JPanel implements ActionListener {
 
                         buttons[i][j].setText(String.valueOf(onTurn));
                         turns++;
+                        String line = check();
+                        textPanel.setTextOnPanel(line);
 
                         if(onTurn == player1){
-
                             buttons[i][j].setForeground(Color.BLUE);
                             onTurn = player2;
-                            check();
+                            if(line == null) textPanel.setTextOnPanel(player2 + "´s turn");
                             break;
 
                         } else {
-
                             buttons[i][j].setForeground(Color.RED);
                             onTurn = player1;
-                            check();
+                            if(line == null) textPanel.setTextOnPanel(player1 + "´s turn");
                             break;
                         }
+
                     }
                 }
             }
@@ -150,17 +156,21 @@ public class TicTacToe extends JPanel implements ActionListener {
                 buttons[i][j].setEnabled(true);
                 buttons[i][j].setBackground(Color.GRAY);
             }
-
         }
+        firstTurn();
         turns = 0;
-
     }
-
     public void setTie(JButton button){
+        textPanel.setTextOnPanel("TIE");
         button.setForeground(Color.WHITE);
         button.setBackground(Color.gray);
         button.setEnabled(false);
     }
+    public void setTextPanel(TextPanel textPanel) {
+        this.textPanel = textPanel;
+    }
+    public void setResetButton(){
 
+    }
 
 }

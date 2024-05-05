@@ -12,7 +12,7 @@ public class ResetButton extends JPanel implements ActionListener {
 
     private JButton resetToLobby;
     private FramePanel framePanel;
-    private FRAME_COMPONENTS.Frame frame;
+    private Frame frame;
 
     public ResetButton(FramePanel framePanel, Frame frame) {
         this.frame = frame;
@@ -57,8 +57,9 @@ public class ResetButton extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(resetToLobby.equals(e.getSource())){
-            framePanel.turnOffFramePanel();
+            framePanel.quitGame();
             frame.enableGameOButtons(true);
+            frame.setTitle("Lobby");
         }
     }
 }

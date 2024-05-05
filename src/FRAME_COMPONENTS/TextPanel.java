@@ -22,7 +22,7 @@ public class TextPanel extends JPanel {
         texPanel.setBackground(new Color(114, 0, 255, 255));
         texPanel.setForeground(Color.WHITE);
         texPanel.setHorizontalAlignment(JLabel.CENTER);
-        texPanel.setFont(new Font("Arial",Font.BOLD,30));
+        texPanel.setFont(new Font("Arial",Font.BOLD,40));
         texPanel.setFocusable(false);
         texPanel.setOpaque(true);
 

@@ -1,0 +1,5 @@
+package FRAME_COMPONENTS;
+
+public enum GamePlaying {
+    MASTERMIND,TICTACTOE,QUORIDOR,NONE
+}

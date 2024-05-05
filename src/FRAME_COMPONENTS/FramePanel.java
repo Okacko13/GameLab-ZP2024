@@ -12,7 +12,6 @@ public class FramePanel extends JPanel {
     protected TextPanel textPanel;
     private ResetTicTacToeButton resetTTT;
     private ResetButton backToLobby;
-
     private JPanel top;
 
     public FramePanel(GamePanel gamePanel, TextPanel textPanel, ResetTicTacToeButton resetTTT, ResetButton backToLobby) {
@@ -25,10 +24,6 @@ public class FramePanel extends JPanel {
         setTop();
         add(gamePanel,BorderLayout.CENTER);
         setFramePanel();
-    }
-
-    public void turnOffFramePanel(){
-        this.setVisible(false);
     }
 
     public void setVisibility(boolean bool){
@@ -62,6 +57,11 @@ public class FramePanel extends JPanel {
         resetTTT.setTicTacToe(ticTacToe);
         top.setVisible(true);
         setVisibility(true);
+    }
+
+    public void quitGame(){
+        gamePanel.removeGame();
+        setVisibility(false);
     }
 
 

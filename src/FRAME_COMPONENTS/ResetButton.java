@@ -30,7 +30,7 @@ public class ResetButton extends JPanel implements ActionListener {
     public void setUpPanel(){
         setSize(200,150);
         setLocation(0,0);
-        setBackground(new Color(72, 67, 66));
+        setBackground(Color.WHITE);
         setLayout(null);
     }
 

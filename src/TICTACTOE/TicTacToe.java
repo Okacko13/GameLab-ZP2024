@@ -101,6 +101,7 @@ public class TicTacToe extends JPanel implements ActionListener {
     }
 
     public void win(int rowOne,int colOne,int rowTwo,int colTwo,int rowThree,int colThree){
+
         buttons[rowOne][colOne].setBackground(Color.GREEN);
         buttons[rowTwo][colTwo].setBackground(Color.GREEN);
         buttons[rowThree][colThree].setBackground(Color.GREEN);

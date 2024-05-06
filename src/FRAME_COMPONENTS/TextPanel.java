@@ -9,12 +9,12 @@ public class TextPanel extends JPanel {
 
     public TextPanel() {
 
-        initializeTextPanel();
+        initializeTextLabel();
         initializePanel();
 
     }
 
-    public void initializeTextPanel(){
+    public void initializeTextLabel(){
         texPanel = new JLabel();
 
         texPanel.setBounds(10,10,310,130);
@@ -26,13 +26,12 @@ public class TextPanel extends JPanel {
         texPanel.setFocusable(false);
         texPanel.setOpaque(true);
 
-
     }
 
     public void initializePanel(){
         setSize(350,150);
         setLocation(400,0);
-        setBackground(new Color(72, 67, 66));
+        setBackground(Color.WHITE);
         setLayout(null);
 
         add(texPanel);

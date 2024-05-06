@@ -1,5 +1,5 @@
 package MASTERMIND;
 
 public enum Colors {
-    YELLOW,GREEN,WHITE,BLACK,BLUE,RED
+    RED,GREEN,BLUE,YELLOW,WHITE,BLACK
 }

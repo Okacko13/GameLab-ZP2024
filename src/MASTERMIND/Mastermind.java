@@ -6,7 +6,13 @@ import javax.swing.*;
 
 public class Mastermind extends JPanel {
 
+    private GamePhase gamePhase = GamePhase.SETTINGUP;
+
+    private Row settedPins;
+
+    private Row[] quessedPins;
     private JComboBox[] enterColors;
+
     private TextPanel textPanel;
 
     public Mastermind() {
@@ -19,7 +25,6 @@ public class Mastermind extends JPanel {
         setSize(750,600);
         setLocation(0,0);
         setLayout(null);
-
 
     }
 
@@ -37,6 +42,8 @@ public class Mastermind extends JPanel {
         enterColors[3].setBounds(565,350,100,40);
 
     }
+
+
 
 
 

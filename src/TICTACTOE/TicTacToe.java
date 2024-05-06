@@ -20,7 +20,7 @@ public class TicTacToe extends JPanel implements ActionListener {
 
         this.textPanel = textPanel;
 
-        setBounds(0,0,750,750);
+        setBounds(-5,0,750,560);
         setLayout(new GridLayout(3,3));
 
         initializeButtons();
@@ -84,7 +84,6 @@ public class TicTacToe extends JPanel implements ActionListener {
                 win(0,0,1,1,2,2);
                 return buttons[0][0].getText() + " is winner";
             }
-            //diagonal
             if (buttons[0][2].getText().equals(buttons[1][1].getText()) && buttons[1][1].getText().equals(buttons[2][0].getText()) && !buttons[0][2].getText().equals("")) {
                 win(0,2,1,1,2,0);
                 return buttons[0][2].getText() + " is winner";

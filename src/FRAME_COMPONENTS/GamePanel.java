@@ -30,6 +30,7 @@ public class GamePanel extends JPanel {
         setVisible(bool);
     }
     public void removeGame(){
+
         if(gamePlaying == GamePlaying.TICTACTOE){
             gamePlaying = GamePlaying.NONE;
             remove(ticTacToe);
@@ -45,7 +46,7 @@ public class GamePanel extends JPanel {
                 remove(ticTacToe);
             case MASTERMIND:
                 gamePlaying = GamePlaying.NONE;
-                //remove(mastermind);
+                remove(mastermind);
         }
 
     }
@@ -53,11 +54,21 @@ public class GamePanel extends JPanel {
     public void startTicTacToe(TicTacToe ticTacToe){
 
         gamePlaying = GamePlaying.TICTACTOE;
+        setLayout(null);
 
         this.ticTacToe = ticTacToe;
 
         add(ticTacToe);
 
+    }
+    public void startMastermind(Mastermind mastermind){
+
+        gamePlaying = GamePlaying.MASTERMIND;
+        setLayout(null);
+
+        this.mastermind = mastermind;
+
+        add(mastermind);
     }
 
     public void getGame(){

@@ -1,5 +1,6 @@
 package FRAME_COMPONENTS;
 
+import MASTERMIND.Mastermind;
 import TICTACTOE.ResetTicTacToeButton;
 import TICTACTOE.TicTacToe;
 
@@ -54,8 +55,19 @@ public class FramePanel extends JPanel {
 
         gamePanel.setVisibility(true);
         gamePanel.startTicTacToe(ticTacToe);
+
         resetTTT.setTicTacToe(ticTacToe);
+
         top.setVisible(true);
+        setVisibility(true);
+
+    }
+    public void startMastermind(Mastermind mastermind){
+        gamePanel.setVisibility(true);
+        gamePanel.startMastermind(mastermind);
+
+        top.setVisible(true);
+
         setVisibility(true);
     }
 

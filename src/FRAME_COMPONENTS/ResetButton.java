@@ -59,6 +59,7 @@ public class ResetButton extends JPanel implements ActionListener {
         if(resetToLobby.equals(e.getSource())){
             framePanel.quitGame();
             frame.enableGameOButtons(true);
+            framePanel.textPanel.clearPanel();
             frame.setTitle("Lobby");
         }
     }

@@ -26,7 +26,6 @@ public class TextPanel extends JPanel {
         texPanel.setFocusable(false);
         texPanel.setOpaque(true);
 
-        texPanel.setText("Pokus");
 
     }
 
@@ -42,5 +41,9 @@ public class TextPanel extends JPanel {
 
     public void setTextOnPanel(String text){
         texPanel.setText(text);
+    }
+
+    public void clearPanel(){
+        texPanel.setText("");
     }
 }

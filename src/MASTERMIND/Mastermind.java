@@ -69,6 +69,7 @@ public class Mastermind extends JPanel implements ActionListener {
         checkButton.setForeground(Color.BLACK);
         checkButton.setBorder(BorderFactory.createLineBorder(Color.BLACK,3));
         checkButton.setVisible(true);
+        checkButton.addActionListener(this);
         add(checkButton);
 
     }
@@ -94,9 +95,49 @@ public class Mastermind extends JPanel implements ActionListener {
         add(textP);
     }
 
+    public void setSettedPins(){
+
+        for (int i = 0; i < 4; i++) {
+
+            if(enterColors[i].getSelectedItem().equals("")){
+                settedPins.setPinByIndex(i,Colors.NONE);
+            }if(enterColors[i].getSelectedItem().equals(String.valueOf(Colors.RED))){
+                settedPins.setPinByIndex(i,Colors.RED);
+            } else if(enterColors[i].getSelectedItem().equals(String.valueOf(Colors.YELLOW))){
+                settedPins.setPinByIndex(i,Colors.YELLOW);
+            }else if(enterColors[i].getSelectedItem().equals(String.valueOf(Colors.GREEN))){
+                settedPins.setPinByIndex(i,Colors.GREEN);
+            }else if(enterColors[i].getSelectedItem().equals(String.valueOf(Colors.BLACK))){
+                settedPins.setPinByIndex(i,Colors.BLACK);
+            }else if(enterColors[i].getSelectedItem().equals(String.valueOf(Colors.BLUE))){
+                settedPins.setPinByIndex(i,Colors.BLUE);
+            }else if(enterColors[i].getSelectedItem().equals(String.valueOf(Colors.WHITE))){
+                settedPins.setPinByIndex(i,Colors.WHITE);
+            }
+        }
+
+        if(settedPins.numberOfColoredPins(settedPins) == 4){
+            if(!settedPins.checkSameColorInRow(settedPins)){
+                gamePhase = GamePhase.QUESSING;
+                hideEnteredColors();
+            }
+        }
+
+
+    }
+
+    public void hideEnteredColors(){
+        for (int i = 0; i < enterColors.length; i++) {
+            enterColors[i].setVisible(false);
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource() == checkButton){
+            settedPins = new Row();
+            setSettedPins();
+        }
     }
 
 }

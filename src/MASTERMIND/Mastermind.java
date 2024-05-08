@@ -15,7 +15,7 @@ public class Mastermind extends JPanel implements ActionListener {
 
     private Row[] quessedPins;
 
-    private JButton checkButton;
+    private CheckButton checkButton;
     private JComboBox[] enterColors;
 
     private JPanel textP;
@@ -61,15 +61,10 @@ public class Mastermind extends JPanel implements ActionListener {
 
     public void initializeCheckButton(){
 
-        checkButton = new JButton("DONE");
-        checkButton.setFont(new Font("Times new roman", Font.PLAIN, 20));
-        checkButton.setFocusable(false);
-        checkButton.setBounds(275,400,200,50);
-        checkButton.setBackground(Color.LIGHT_GRAY);
-        checkButton.setForeground(Color.BLACK);
-        checkButton.setBorder(BorderFactory.createLineBorder(Color.BLACK,3));
-        checkButton.setVisible(true);
-        checkButton.addActionListener(this);
+        checkButton = new CheckButton();
+
+        checkButton.setTextButton("DONE");
+        checkButton.setActionListener(this);
         add(checkButton);
 
     }
@@ -123,7 +118,6 @@ public class Mastermind extends JPanel implements ActionListener {
             }
         }
 
-
     }
 
     public void hideEnteredColors(){
@@ -134,9 +128,15 @@ public class Mastermind extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if(e.getSource() == checkButton){
-            settedPins = new Row();
-            setSettedPins();
+            if(gamePhase == GamePhase.SETTINGUP){
+                settedPins = new Row();
+                setSettedPins();
+            } else if(gamePhase == GamePhase.QUESSING){
+
+            }
+
         }
     }
 

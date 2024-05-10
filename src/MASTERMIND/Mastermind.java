@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 public class Mastermind extends JPanel implements ActionListener {
 
     private GamePhase gamePhase = GamePhase.SETTINGUP;
+    private int numberOfQueses = 0;
 
     private Row settedPins;
 
@@ -25,7 +26,7 @@ public class Mastermind extends JPanel implements ActionListener {
 
     public Mastermind() {
 
-        setPanel();
+        setMainPanel();
         initializeComboBox();
         initializeCheckButton();
         textPanelSetUp();
@@ -33,7 +34,7 @@ public class Mastermind extends JPanel implements ActionListener {
 
     }
 
-    public void setPanel(){
+    public void setMainPanel(){
         setSize(750,600);
         setLocation(0,0);
         setLayout(null);
@@ -60,13 +61,10 @@ public class Mastermind extends JPanel implements ActionListener {
     }
 
     public void initializeCheckButton(){
-
         checkButton = new CheckButton();
-
         checkButton.setTextButton("DONE");
         checkButton.setActionListener(this);
         add(checkButton);
-
     }
 
     public void textPanelSetUp(){
@@ -91,39 +89,98 @@ public class Mastermind extends JPanel implements ActionListener {
     }
 
     public void setSettedPins(){
+        if(gamePhase == GamePhase.SETTINGUP) {
+            for (int i = 0; i < 4; i++) {
+                if (enterColors[i].getSelectedItem().equals("")) {
+                    settedPins.setPinByIndex(i, null);
+                }else if (enterColors[i].getSelectedItem().equals("RED")) {
+                    settedPins.setPinByIndex(i, Color.RED);
+                } else if (enterColors[i].getSelectedItem().equals("YELLOW")) {
+                    settedPins.setPinByIndex(i, Color.YELLOW);
+                } else if (enterColors[i].getSelectedItem().equals("GREEN")) {
+                    settedPins.setPinByIndex(i, Color.GREEN);
+                } else if (enterColors[i].getSelectedItem().equals("BLACK")) {
+                    settedPins.setPinByIndex(i, Color.BLACK);
+                } else if (enterColors[i].getSelectedItem().equals("BLUE")) {
+                    settedPins.setPinByIndex(i, Color.BLUE);
+                } else if (enterColors[i].getSelectedItem().equals("WHITE")) {
+                    settedPins.setPinByIndex(i, Color.WHITE);
+                }
+            }
 
-        for (int i = 0; i < 4; i++) {
-
-            if(enterColors[i].getSelectedItem().equals("")){
-                settedPins.setPinByIndex(i,Colors.NONE);
-            }if(enterColors[i].getSelectedItem().equals(String.valueOf(Colors.RED))){
-                settedPins.setPinByIndex(i,Colors.RED);
-            } else if(enterColors[i].getSelectedItem().equals(String.valueOf(Colors.YELLOW))){
-                settedPins.setPinByIndex(i,Colors.YELLOW);
-            }else if(enterColors[i].getSelectedItem().equals(String.valueOf(Colors.GREEN))){
-                settedPins.setPinByIndex(i,Colors.GREEN);
-            }else if(enterColors[i].getSelectedItem().equals(String.valueOf(Colors.BLACK))){
-                settedPins.setPinByIndex(i,Colors.BLACK);
-            }else if(enterColors[i].getSelectedItem().equals(String.valueOf(Colors.BLUE))){
-                settedPins.setPinByIndex(i,Colors.BLUE);
-            }else if(enterColors[i].getSelectedItem().equals(String.valueOf(Colors.WHITE))){
-                settedPins.setPinByIndex(i,Colors.WHITE);
+            if (settedPins.numberOfColoredPins(settedPins) == 4) {
+                if (!settedPins.checkSameColorInRow(settedPins)) {
+                    gamePhase = GamePhase.QUESSING;
+                    setQuessingPhase();
+                }
             }
         }
+    }
+    public void setQuessingPhase(){
+        enterColors[0].setBounds(80,20,100,40);
+        enterColors[1].setBounds(240,20,100,40);
+        enterColors[2].setBounds(400,20,100,40);
+        enterColors[3].setBounds(560,20,100,40);
 
-        if(settedPins.numberOfColoredPins(settedPins) == 4){
-            if(!settedPins.checkSameColorInRow(settedPins)){
-                gamePhase = GamePhase.QUESSING;
-                hideEnteredColors();
-            }
-        }
+        setEnteredColorsSetSelectedIndex(0);
+        textLabel.setText("↑ enter your ques ↑");
+        checkButton.setTextButton("QUES");
+
+        checkButton.setLocation(275,500);
+
+        quessedPins = new Row[10];
 
     }
-
-    public void hideEnteredColors(){
-        for (int i = 0; i < enterColors.length; i++) {
-            enterColors[i].setVisible(false);
+    public void setEnteredColorsSetSelectedIndex(int index){
+        for(int i = 0; i < enterColors.length; i++){
+            enterColors[i].setSelectedIndex(index);
         }
+    }
+    public void ques(){
+        quessedPins[numberOfQueses] = new Row();
+        quessedPins[numberOfQueses].initializePinDisplays();
+
+        for (int i = 0; i < 4; i++) {
+            if (enterColors[i].getSelectedItem().equals("")) {
+                quessedPins[numberOfQueses].setPinByIndex(i, null);
+
+            }else if (enterColors[i].getSelectedItem().equals("RED")) {
+                quessedPins[numberOfQueses].setPinByIndex(i, Color.RED);
+                quessedPins[numberOfQueses].setPinDisplaysColor(i,Color.RED);
+
+            } else if (enterColors[i].getSelectedItem().equals("YELLOW")) {
+                quessedPins[numberOfQueses].setPinByIndex(i, Color.YELLOW);
+                quessedPins[numberOfQueses].setPinDisplaysColor(i,Color.YELLOW);
+
+            } else if (enterColors[i].getSelectedItem().equals("GREEN")) {
+                quessedPins[numberOfQueses].setPinByIndex(i, Color.GREEN);
+                quessedPins[numberOfQueses].setPinDisplaysColor(i,Color.GREEN);
+
+            } else if (enterColors[i].getSelectedItem().equals("BLACK")) {
+                quessedPins[numberOfQueses].setPinByIndex(i, Color.BLACK);
+                quessedPins[numberOfQueses].setPinDisplaysColor(i,Color.BLACK);
+
+            } else if (enterColors[i].getSelectedItem().equals("BLUE")) {
+                quessedPins[numberOfQueses].setPinByIndex(i, Color.BLUE);
+                quessedPins[numberOfQueses].setPinDisplaysColor(i,Color.BLUE);
+
+            } else if (enterColors[i].getSelectedItem().equals("WHITE")) {
+                quessedPins[numberOfQueses].setPinByIndex(i, Color.WHITE);
+                quessedPins[numberOfQueses].setPinDisplaysColor(i,Color.WHITE);
+
+            }
+        }
+        quessedPins[numberOfQueses].setLocationPinDisplays(numberOfQueses);
+        quessedPins[numberOfQueses].setVisibleRow(true);
+
+        quessedPins[numberOfQueses].createVisibleRow(numberOfQueses);
+
+        add(quessedPins[numberOfQueses].getRowPanel());
+
+        setEnteredColorsSetSelectedIndex(0);
+        numberOfQueses++;
+        textP.setVisible(false);
+
     }
 
     @Override
@@ -134,7 +191,7 @@ public class Mastermind extends JPanel implements ActionListener {
                 settedPins = new Row();
                 setSettedPins();
             } else if(gamePhase == GamePhase.QUESSING){
-
+                ques();
             }
 
         }

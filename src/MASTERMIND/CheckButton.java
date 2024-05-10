@@ -28,7 +28,6 @@ public class CheckButton extends JButton {
     public void enableButton(Boolean bool){
         setVisible(bool);
     }
-
     public void setActionListener(ActionListener actionListener){
         addActionListener(actionListener);
     }

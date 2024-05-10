@@ -117,16 +117,16 @@ public class Mastermind extends JPanel implements ActionListener {
         }
     }
     public void setQuessingPhase(){
-        enterColors[0].setBounds(80,20,100,40);
-        enterColors[1].setBounds(240,20,100,40);
-        enterColors[2].setBounds(400,20,100,40);
-        enterColors[3].setBounds(560,20,100,40);
+        enterColors[0].setBounds(80,10,100,40);
+        enterColors[1].setBounds(240,10,100,40);
+        enterColors[2].setBounds(400,10,100,40);
+        enterColors[3].setBounds(560,10,100,40);
 
         setEnteredColorsSetSelectedIndex(0);
         textLabel.setText("↑ enter your ques ↑");
         checkButton.setTextButton("QUES");
 
-        checkButton.setLocation(275,500);
+        checkButton.setLocation(275,510);
 
         quessedPins = new Row[10];
 

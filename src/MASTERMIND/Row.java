@@ -100,10 +100,10 @@ public class Row {
 
     }
     public void initializePinDisplays(){
-        pinDisplays = new JPanel[]{new JPanel(), new JPanel(), new JPanel(), new JPanel()};
+        pinDisplays = new JPanel[4];
 
         for (int i = 0; i < pinDisplays.length; i++) {
-
+            pinDisplays[i] = new JPanel();
             pinDisplays[i].setSize(20,20);
             pinDisplays[i].setVisible(false);
 

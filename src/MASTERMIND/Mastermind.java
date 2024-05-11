@@ -18,7 +18,7 @@ public class Mastermind extends JPanel implements ActionListener {
 
     private CheckButton checkButton;
     private JComboBox[] enterColors;
-
+    private boolean win = false;
     private JPanel textP;
     private JLabel textLabel;
 
@@ -192,15 +192,22 @@ public class Mastermind extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == checkButton){
-            if(gamePhase == GamePhase.SETTINGUP){
-                settedPins = new Row();
-                setSettedPins();
-            } else if(gamePhase == GamePhase.QUESSING){
-                ques();
-                setVisible(true);
+        if(!win){
+            if(e.getSource() == checkButton){
+                if(gamePhase == GamePhase.SETTINGUP){
+                    settedPins = new Row();
+                    setSettedPins();
+                } else if(gamePhase == GamePhase.QUESSING){
+                    ques();
+                    quessedPins[numberOfQueses-1].check(settedPins);
+                    if(quessedPins[numberOfQueses-1].hasRowSimilarPins(settedPins)){
+                        win = true;
+                    }
+                    setVisible(true);
+                }
             }
         }
+
     }
 
 }

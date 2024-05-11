@@ -8,6 +8,8 @@ public class Row {
     private JPanel[] pinDisplays;
     protected Pin[] pins;
 
+    private JPanel[] checkDisplays;
+
     public Row() {
         initializePins();
     }
@@ -83,11 +85,13 @@ public class Row {
     public void createVisibleRow(int indexOfRow){
 
         initializeRowPanel(getHeightByIndex(indexOfRow));
+        initializeCheckPanels();
 
         for (int i = 0; i < pinDisplays.length; i++) {
             rowPanel.add(pinDisplays[i]);
+            rowPanel.add(checkDisplays[i]);
         }
-
+        setCheckDisplaysColor(Color.DARK_GRAY);
         rowPanel.setVisible(true);
     }
     public void initializeRowPanel(int height){
@@ -148,5 +152,70 @@ public class Row {
 
         return 0;
     }
+
+    public void initializeCheckPanels(){
+        checkDisplays = new JPanel[4];
+        for(int i = 0; i <checkDisplays.length; i++){
+            checkDisplays[i] = new JPanel();
+            checkDisplays[i].setSize(20,20);
+            checkDisplays[i].setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+            checkDisplays[i].setVisible(true);
+        }
+
+        checkDisplays[0].setLocation(505,0);
+        checkDisplays[1].setLocation(545,0);
+        checkDisplays[2].setLocation(585,0);
+        checkDisplays[3].setLocation(625,0);
+
+    }
+    public void setCheckDisplaysColor(Color color){
+        for (int i = 0; i < checkDisplays.length; i++) {
+            checkDisplays[i].setBackground(color);
+        }
+    }
+    //asfkdg gbquokfb asodfhqwelfb wkuqeafhbn qolrfi basklfjb qweolf bwLEFIK Bwelf bjwiofvc wJKL,EFB olwinKLAfnb oilnwe iklwahfp LKWEBOF SHBNDFLIHWEOP IFLBN
+
+    public boolean hasRowSimilarPins(Row row){
+
+        if(this.pins[0].getColor().equals(row.getPin(0).getColor()) &&
+                this.pins[1].getColor().equals(row.getPin(1).getColor()) &&
+                this.pins[2].getColor().equals(row.getPin(2).getColor()) &&
+                this.pins[3].getColor().equals(row.getPin(3).getColor())) {
+
+            setCheckDisplaysColor(Color.GREEN);
+            return true;
+        }
+
+        return false;
+    }
+
+
+    public void check(Row row){
+        boolean isColored;
+
+        for (int i = 0; i < pins.length; i++) {
+
+            isColored = false;
+
+            for(int j = 0; j < pins.length; j++){
+
+                if(pins[i].getColor() == row.pins[j].getColor()){
+                    if(i == j){
+                        checkDisplays[i].setBackground(Color.GREEN);
+                    } else {
+                        checkDisplays[i].setBackground(Color.BLUE);
+                    }
+                    isColored = true;
+                    break;
+                }
+
+            }
+            if(!isColored){
+                checkDisplays[i].setBackground(Color.RED);
+            }
+        }
+
+    }
+
 
 }

@@ -45,4 +45,8 @@ public class TextPanel extends JPanel {
     public void clearPanel(){
         texPanel.setText("");
     }
+    public void setSizeOfText(int size){
+        texPanel.setFont(new Font("Arial",Font.BOLD,size));
+    }
+
 }

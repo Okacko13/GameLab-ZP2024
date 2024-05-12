@@ -1,6 +1,7 @@
 package FRAME_COMPONENTS;
 
 import MASTERMIND.Mastermind;
+import MASTERMIND.ResetMastermind;
 import TICTACTOE.ResetTicTacToeButton;
 import TICTACTOE.TicTacToe;
 
@@ -52,7 +53,7 @@ public class Frame extends JFrame implements ActionListener {
 
     }
     public void setUpFramePanel(){
-        framePanel = new FramePanel(new GamePanel(),new TextPanel(),new ResetTicTacToeButton(),new ResetButton(framePanel,this));
+        framePanel = new FramePanel(new GamePanel(),new TextPanel(),new ResetTicTacToeButton(),new ResetMastermind(),new ResetButton(framePanel,this));
         add(framePanel);
     }
 
@@ -113,7 +114,7 @@ public class Frame extends JFrame implements ActionListener {
 
     public void startTicTacToeFramePanel(){
         framePanel.setVisibility(true);
-        framePanel.startTicTacToe(new TicTacToe(new TextPanel()));
+        framePanel.startTicTacToe(new TicTacToe());
         enableGameOButtons(false);
     }
     public void startMastermind(){

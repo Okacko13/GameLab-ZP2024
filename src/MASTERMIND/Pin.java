@@ -14,9 +14,7 @@ public class Pin {
     }
 
     public void setColor(Color color) {
-        if(color != null){
-            this.color = color;
-        }
+        this.color = color;
     }
 
 }

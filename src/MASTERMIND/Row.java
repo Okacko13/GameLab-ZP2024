@@ -76,8 +76,16 @@ public class Row {
 
         return numberOfColoredPins;
     }
+    public void setRowNull(){
+        rowPanel = null;
+        for (int i = 0; i < 4; i++) {
+            pins[i] = null;
+            checkDisplays[i] = null;
+            pinDisplays[i] = null;
+        }
+    }
 
-    //asfkdg gbquokfb asodfhqwelfb wkuqeafhbn qolrfi basklfjb qweolf bwLEFIK Bwelf bjwiofvc wJKL,EFB olwinKLAfnb oilnwe iklwahfp LKWEBOF SHBNDFLIHWEOP IFLBN
+    //methods for graphic output
 
     public JPanel getRowPanel(){
         return rowPanel;
@@ -122,11 +130,20 @@ public class Row {
         pinDisplays[3].setLocation(318,0);
 
     }
-    public void setVisibleRow(boolean bool){
+    public void setVisiblePinDisplay(boolean bool){
 
         for (int i = 0; i < pinDisplays.length; i++) {
             pinDisplays[i].setVisible(bool);
         }
+    }
+    public void setVisibleCheckDisplay(boolean bool){
+
+        for (int i = 0; i < pinDisplays.length; i++) {
+            checkDisplays[i].setVisible(bool);
+        }
+    }
+    public void setVisibleRow(boolean bool){
+        rowPanel.setVisible(bool);
     }
     public void setPinDisplaysColor(int index,Color color){
 
@@ -173,7 +190,7 @@ public class Row {
             checkDisplays[i].setBackground(color);
         }
     }
-    //asfkdg gbquokfb asodfhqwelfb wkuqeafhbn qolrfi basklfjb qweolf bwLEFIK Bwelf bjwiofvc wJKL,EFB olwinKLAfnb oilnwe iklwahfp LKWEBOF SHBNDFLIHWEOP IFLBN
+    //methods to check similarity
 
     public boolean hasRowSimilarPins(Row row){
 

@@ -31,22 +31,21 @@ public class GamePanel extends JPanel {
     }
     public void removeGame(){
 
-        if(gamePlaying == GamePlaying.TICTACTOE){
-            gamePlaying = GamePlaying.NONE;
-            remove(ticTacToe);
-        }
         switch (gamePlaying){
             case NONE:
                 break;
             case QUORIDOR:
                 gamePlaying = GamePlaying.NONE;
                 //remove(quoridor);
+                break;
             case TICTACTOE:
                 gamePlaying = GamePlaying.NONE;
                 remove(ticTacToe);
+                break;
             case MASTERMIND:
                 gamePlaying = GamePlaying.NONE;
                 remove(mastermind);
+                break;
         }
 
     }
@@ -71,20 +70,8 @@ public class GamePanel extends JPanel {
         add(mastermind);
     }
 
-    public void getGame(){
-        switch (gamePlaying){
-            case NONE :
-                break;
-            case TICTACTOE:
-                getTicTacToe();
-                break;
-            case MASTERMIND:
-                getMastermind();
-                break;
-            case QUORIDOR:
-                getQuoridor();
-                break;
-        }
+    public GamePlaying getGame(){
+        return this.gamePlaying;
     }
 
     public TicTacToe getTicTacToe(){

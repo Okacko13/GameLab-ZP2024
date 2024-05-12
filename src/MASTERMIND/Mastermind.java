@@ -10,28 +10,22 @@ import java.awt.event.ActionListener;
 public class Mastermind extends JPanel implements ActionListener {
 
     private GamePhase gamePhase = GamePhase.SETTINGUP;
-    private int numberOfQueses = 0;
-
+    private int numberOfGueses = 0;
     private Row settedPins;
-
     private Row[] quessedPins;
-
     private CheckButton checkButton;
     private JComboBox[] enterColors;
     private boolean win = false;
     private JPanel textP;
     private JLabel textLabel;
-
     private TextPanel textPanel;
 
     public Mastermind() {
-
         setMainPanel();
         initializeComboBox();
         initializeCheckButton();
         textPanelSetUp();
         setVisible(true);
-
     }
 
     public void setMainPanel(){
@@ -44,8 +38,16 @@ public class Mastermind extends JPanel implements ActionListener {
     public void initializeComboBox(){
         enterColors = new JComboBox[4];
         String[] colors = {"","YELLOW", "GREEN", "BLUE", "BLACK", "WHITE", "RED"};
+
         for(int i = 0; i < enterColors.length; i++){
             enterColors[i] = new JComboBox(colors);
+
+        }
+        newGameCheckBox();
+    }
+    public void newGameCheckBox(){
+
+        for(int i = 0; i < enterColors.length; i++){
             enterColors[i].addActionListener(this);
             enterColors[i].setFont(new Font("Times new roman", Font.BOLD,17));
             enterColors[i].setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
@@ -69,8 +71,8 @@ public class Mastermind extends JPanel implements ActionListener {
 
     public void textPanelSetUp(){
         textP = new JPanel();
-        textP.setSize(750,200);
-        textP.setLocation(0,25);
+        textP.setSize(750,100);
+        textP.setLocation(0,100);
         textP.setLayout(new BorderLayout());
         textP.setBackground(Color.DARK_GRAY);
 
@@ -125,10 +127,11 @@ public class Mastermind extends JPanel implements ActionListener {
         setEnteredColorsSetSelectedIndex(0);
         textLabel.setText("↑ enter your ques ↑");
         checkButton.setTextButton("QUES");
-
         checkButton.setLocation(275,510);
 
         quessedPins = new Row[10];
+
+        textPanel.setTextOnPanel("Second player guesses");
 
     }
     public void setEnteredColorsSetSelectedIndex(int index){
@@ -137,52 +140,51 @@ public class Mastermind extends JPanel implements ActionListener {
         }
     }
     public void ques(){
-        if(numberOfQueses < 10){
-            quessedPins[numberOfQueses] = new Row();
-            quessedPins[numberOfQueses].initializePinDisplays();
+        if(numberOfGueses < 10){
+            quessedPins[numberOfGueses] = new Row();
+            quessedPins[numberOfGueses].initializePinDisplays();
 
             for (int i = 0; i < 4; i++) {
                 if (enterColors[i].getSelectedItem().equals("")) {
-                    quessedPins[numberOfQueses].setPinByIndex(i, null);
+                    quessedPins[numberOfGueses].setPinByIndex(i, null);
 
                 }else if (enterColors[i].getSelectedItem().equals("RED")) {
-                    quessedPins[numberOfQueses].setPinByIndex(i, Color.RED);
-                    quessedPins[numberOfQueses].setPinDisplaysColor(i,Color.RED);
+                    quessedPins[numberOfGueses].setPinByIndex(i, Color.RED);
+                    quessedPins[numberOfGueses].setPinDisplaysColor(i,Color.RED);
 
                 } else if (enterColors[i].getSelectedItem().equals("YELLOW")) {
-                    quessedPins[numberOfQueses].setPinByIndex(i, Color.YELLOW);
-                    quessedPins[numberOfQueses].setPinDisplaysColor(i,Color.YELLOW);
+                    quessedPins[numberOfGueses].setPinByIndex(i, Color.YELLOW);
+                    quessedPins[numberOfGueses].setPinDisplaysColor(i,Color.YELLOW);
 
                 } else if (enterColors[i].getSelectedItem().equals("GREEN")) {
-                    quessedPins[numberOfQueses].setPinByIndex(i, Color.GREEN);
-                    quessedPins[numberOfQueses].setPinDisplaysColor(i,Color.GREEN);
+                    quessedPins[numberOfGueses].setPinByIndex(i, Color.GREEN);
+                    quessedPins[numberOfGueses].setPinDisplaysColor(i,Color.GREEN);
 
                 } else if (enterColors[i].getSelectedItem().equals("BLACK")) {
-                    quessedPins[numberOfQueses].setPinByIndex(i, Color.BLACK);
-                    quessedPins[numberOfQueses].setPinDisplaysColor(i,Color.BLACK);
+                    quessedPins[numberOfGueses].setPinByIndex(i, Color.BLACK);
+                    quessedPins[numberOfGueses].setPinDisplaysColor(i,Color.BLACK);
 
                 } else if (enterColors[i].getSelectedItem().equals("BLUE")) {
-                    quessedPins[numberOfQueses].setPinByIndex(i, Color.BLUE);
-                    quessedPins[numberOfQueses].setPinDisplaysColor(i,Color.BLUE);
+                    quessedPins[numberOfGueses].setPinByIndex(i, Color.BLUE);
+                    quessedPins[numberOfGueses].setPinDisplaysColor(i,Color.BLUE);
 
                 } else if (enterColors[i].getSelectedItem().equals("WHITE")) {
-                    quessedPins[numberOfQueses].setPinByIndex(i, Color.WHITE);
-                    quessedPins[numberOfQueses].setPinDisplaysColor(i,Color.WHITE);
+                    quessedPins[numberOfGueses].setPinByIndex(i, Color.WHITE);
+                    quessedPins[numberOfGueses].setPinDisplaysColor(i,Color.WHITE);
 
                 }
             }
 
-            quessedPins[numberOfQueses].setLocationPinDisplays(numberOfQueses);
-            quessedPins[numberOfQueses].setVisibleRow(true);
+            quessedPins[numberOfGueses].setLocationPinDisplays(numberOfGueses);
+            quessedPins[numberOfGueses].setVisiblePinDisplay(true);
+            quessedPins[numberOfGueses].createVisibleRow(numberOfGueses);
 
-            quessedPins[numberOfQueses].createVisibleRow(numberOfQueses);
-
-            add(quessedPins[numberOfQueses].getRowPanel());
+            add(quessedPins[numberOfGueses].getRowPanel());
 
             setEnteredColorsSetSelectedIndex(0);
-            numberOfQueses++;
+            numberOfGueses++;
 
-            if(numberOfQueses == 1){
+            if(numberOfGueses == 1){
                 textP.setVisible(false);
             }
 
@@ -199,15 +201,21 @@ public class Mastermind extends JPanel implements ActionListener {
                     setSettedPins();
                 } else if(gamePhase == GamePhase.QUESSING){
                     ques();
-                    quessedPins[numberOfQueses-1].check(settedPins);
-                    if(quessedPins[numberOfQueses-1].hasRowSimilarPins(settedPins)){
+                    quessedPins[numberOfGueses-1].check(settedPins);
+                    if(quessedPins[numberOfGueses-1].hasRowSimilarPins(settedPins)){
                         win = true;
+                        textPanel.setTextOnPanel("Guess is correct");
                     }
                     setVisible(true);
                 }
             }
         }
+    }
 
+    public void setTextPanel(TextPanel textPanel){
+        this.textPanel = textPanel;
+        textPanel.setSizeOfText(20);
+        textPanel.setTextOnPanel("First player sets up the puzzle");
     }
 
 }

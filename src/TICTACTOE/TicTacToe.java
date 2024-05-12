@@ -11,20 +11,17 @@ public class TicTacToe extends JPanel implements ActionListener {
     private Random random = new Random();
     private final char player1 = 'X';
     private final char player2 = 'O';
-    private char onTurn = player2;
+    private char onTurn;
     private JButton[][] buttons;
     private int turns;
     private TextPanel textPanel;
 
-    public TicTacToe(TextPanel textPanel) {
-
-        this.textPanel = textPanel;
+    public TicTacToe() {
 
         setBounds(-5,0,750,560);
         setLayout(new GridLayout(3,3));
 
         initializeButtons();
-        firstTurn();
 
         setVisible(true);
 
@@ -50,11 +47,12 @@ public class TicTacToe extends JPanel implements ActionListener {
     public void firstTurn(){
         int generated = random.nextInt(2);
 
-        if(generated== 1){
+        if(generated == 1){
             onTurn = player1;
-            textPanel.setTextOnPanel(player1 + " is on turn");
-        } else{
-            textPanel.setTextOnPanel(player2 + " is on turn");
+            textPanel.setTextOnPanel(player1 + " has first turn");
+        } else if(generated == 0){
+            onTurn = player2;
+            textPanel.setTextOnPanel(player2 + " has first turn");
         }
 
     }
@@ -95,6 +93,7 @@ public class TicTacToe extends JPanel implements ActionListener {
                         setTie(buttons[r][c]);
                     }
                 }
+                textPanel.setTextOnPanel("TIE");
             }
         }
         return null;
@@ -116,8 +115,10 @@ public class TicTacToe extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        boolean turnDone = false;
 
         for(int i = 0; i < buttons.length; i++){
+            turnDone = false;
             for (int j = 0; j < buttons.length; j++) {
 
                 if(buttons[i][j] == e.getSource()){
@@ -133,17 +134,22 @@ public class TicTacToe extends JPanel implements ActionListener {
                                 buttons[i][j].setForeground(Color.BLUE);
                                 onTurn = player2;
                                 if(line == null) textPanel.setTextOnPanel(player2 + "´s turn");
+                                turnDone = true;
                                 break;
 
                             } else {
                                 buttons[i][j].setForeground(Color.RED);
                                 onTurn = player1;
                                 if(line == null) textPanel.setTextOnPanel(player1 + "´s turn");
+                                turnDone = true;
                                 break;
                             }
                         }
                     }
                 }
+            }
+            if(turnDone){
+                break;
             }
         }
     }
@@ -166,6 +172,7 @@ public class TicTacToe extends JPanel implements ActionListener {
     }
     public void setTextPanel(TextPanel textPanel) {
         this.textPanel = textPanel;
+        textPanel.setSizeOfText(40);
     }
 
 

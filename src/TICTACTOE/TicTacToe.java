@@ -18,7 +18,7 @@ public class TicTacToe extends JPanel implements ActionListener {
 
     public TicTacToe() {
 
-        setBounds(-5,0,750,560);
+        setBounds(-5,0,750,565);
         setLayout(new GridLayout(3,3));
 
         initializeButtons();
@@ -50,7 +50,7 @@ public class TicTacToe extends JPanel implements ActionListener {
         if(generated == 1){
             onTurn = player1;
             textPanel.setTextOnPanel(player1 + " has first turn");
-        } else if(generated == 0){
+        } else {
             onTurn = player2;
             textPanel.setTextOnPanel(player2 + " has first turn");
         }
@@ -60,21 +60,21 @@ public class TicTacToe extends JPanel implements ActionListener {
     public String check(){
         if(turns > 4){
             //hotizontal
-            for (int r = 0; r < 3; r++) {
-                if (buttons[r][0].getText().equals("")) continue;
+            for (int i = 0; i < 3; i++) {
+                if (buttons[i][0].getText().equals("")) continue;
 
-                if (buttons[r][0].getText().equals(buttons[r][1].getText()) && buttons[r][1].getText().equals(buttons[r][2].getText())) {
-                    win(r,0,r,1,r,2);
-                    return buttons[r][0].getText() + " is winner";
+                if (buttons[i][0].getText().equals(buttons[i][1].getText()) && buttons[i][1].getText().equals(buttons[i][2].getText())) {
+                    win(i,0,i,1,i,2);
+                    return buttons[i][0].getText() + " is winner";
                 }
             }
             //vertical
-            for (int c = 0; c < 3; c++) {
-                if (buttons[0][c].getText().equals("")) continue;
+            for (int i = 0; i < 3; i++) {
+                if (buttons[0][i].getText().equals("")) continue;
 
-                if (buttons[0][c].getText().equals(buttons[1][c].getText()) && buttons[1][c].getText().equals(buttons[2][c].getText())) {
-                    win(0,c,1,c,2,c);
-                    return buttons[0][c].getText() + " is winner";
+                if (buttons[0][i].getText().equals(buttons[1][i].getText()) && buttons[1][i].getText().equals(buttons[2][i].getText())) {
+                    win(0,i,1,i,2,i);
+                    return buttons[0][i].getText() + " is winner";
                 }
             }
             //diagonal

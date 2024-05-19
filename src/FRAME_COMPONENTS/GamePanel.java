@@ -36,7 +36,7 @@ public class GamePanel extends JPanel {
                 break;
             case QUORIDOR:
                 gamePlaying = GamePlaying.NONE;
-                //remove(quoridor);
+                remove(quoridor);
                 break;
             case TICTACTOE:
                 gamePlaying = GamePlaying.NONE;
@@ -69,6 +69,16 @@ public class GamePanel extends JPanel {
 
         add(mastermind);
     }
+    public void startQuoridor(Quoridor quoridor){
+
+        gamePlaying = GamePlaying.QUORIDOR;
+        setLayout(null);
+
+        this.quoridor = quoridor;
+        add(quoridor);
+
+    }
+
 
     public GamePlaying getGame(){
         return this.gamePlaying;

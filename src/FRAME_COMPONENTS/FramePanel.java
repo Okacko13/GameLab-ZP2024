@@ -2,6 +2,7 @@ package FRAME_COMPONENTS;
 
 import MASTERMIND.Mastermind;
 import MASTERMIND.ResetMastermind;
+import QUORIDOR.Quoridor;
 import TICTACTOE.ResetTicTacToeButton;
 import TICTACTOE.TicTacToe;
 
@@ -79,6 +80,14 @@ public class FramePanel extends JPanel {
 
         top.setVisible(true);
 
+        setVisibility(true);
+    }
+    public void startQuoridor(Quoridor quoridor){
+
+        gamePanel.startQuoridor(quoridor);
+        gamePanel.setVisibility(true);
+
+        top.setVisible(true);
         setVisibility(true);
     }
 

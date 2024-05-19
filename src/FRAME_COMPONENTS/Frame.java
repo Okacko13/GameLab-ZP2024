@@ -2,6 +2,7 @@ package FRAME_COMPONENTS;
 
 import MASTERMIND.Mastermind;
 import MASTERMIND.ResetMastermind;
+import QUORIDOR.Quoridor;
 import TICTACTOE.ResetTicTacToeButton;
 import TICTACTOE.TicTacToe;
 
@@ -123,6 +124,12 @@ public class Frame extends JFrame implements ActionListener {
         enableGameOButtons(false);
     }
 
+    public void startQuoridor(){
+        framePanel.setVisibility(true);
+        framePanel.startQuoridor(new Quoridor());
+        enableGameOButtons(false);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (gameOpener[0].equals(e.getSource())) {
@@ -136,6 +143,7 @@ public class Frame extends JFrame implements ActionListener {
 
         } else if(gameOpener[2].equals(e.getSource())){
             setTitle("Quoridor");
+            startQuoridor();
 
         }
     }

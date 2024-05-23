@@ -205,6 +205,7 @@ public class Mastermind extends JPanel implements ActionListener {
                     if(guessedPins[numberOfGueses-1].hasRowSimilarPins(settedPins)){
                         win = true;
                         textPanel.setTextOnPanel("Guess is correct");
+
                     }
                     setVisible(true);
                 }

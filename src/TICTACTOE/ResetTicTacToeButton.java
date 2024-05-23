@@ -38,7 +38,7 @@ public class ResetTicTacToeButton extends JPanel implements ActionListener {
     public void initializePanel(){
         this.setSize(200,150);
         setLocation(200,0);
-        this.setBackground(Color.WHITE);
+        this.setBackground(Color.DARK_GRAY);
         this.setLayout(null);
 
     }

@@ -3,6 +3,7 @@ package FRAME_COMPONENTS;
 import MASTERMIND.Mastermind;
 import MASTERMIND.ResetMastermind;
 import QUORIDOR.Quoridor;
+import QUORIDOR.ResetQuoridorButton;
 import TICTACTOE.ResetTicTacToeButton;
 import TICTACTOE.TicTacToe;
 
@@ -15,14 +16,16 @@ public class FramePanel extends JPanel {
     protected TextPanel textPanel;
     private ResetTicTacToeButton resetTTT;
     private ResetMastermind resetMastermind;
+    private ResetQuoridorButton resetQuoridor;
     private ResetButton backToLobby;
     private JPanel top;
 
-    public FramePanel(GamePanel gamePanel, TextPanel textPanel, ResetTicTacToeButton resetTTT, ResetMastermind resetMastermind, ResetButton backToLobby) {
+    public FramePanel(GamePanel gamePanel, TextPanel textPanel, ResetTicTacToeButton resetTTT, ResetMastermind resetMastermind, ResetQuoridorButton resetQuoridor, ResetButton backToLobby) {
         this.gamePanel = gamePanel;
         this.textPanel = textPanel;
         this.resetTTT = resetTTT;
         this.resetMastermind = resetMastermind;
+        this.resetQuoridor = resetQuoridor;
         this.backToLobby = backToLobby;
         backToLobby.setFramePanel(this);
         setTop();
@@ -84,8 +87,12 @@ public class FramePanel extends JPanel {
     }
     public void startQuoridor(Quoridor quoridor){
 
+        top.add(resetQuoridor);
+
         gamePanel.startQuoridor(quoridor);
         gamePanel.setVisibility(true);
+
+        resetQuoridor.setGamePanel(this);
 
         top.setVisible(true);
         setVisibility(true);
@@ -101,7 +108,7 @@ public class FramePanel extends JPanel {
                 top.remove(resetTTT);
                 break;
             case QUORIDOR:
-                //top.remove(resetQuoridor);
+                top.remove(resetQuoridor);
                 break;
             case NONE:
                 break;

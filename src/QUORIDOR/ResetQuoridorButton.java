@@ -1,4 +1,4 @@
-package MASTERMIND;
+package QUORIDOR;
 
 import FRAME_COMPONENTS.FramePanel;
 
@@ -7,16 +7,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ResetMastermind extends JPanel implements ActionListener {
+public class ResetQuoridorButton extends JPanel implements ActionListener {
 
     private JButton resetButton;
     private FramePanel gamePanel;
 
-    public ResetMastermind() {
+    public ResetQuoridorButton() {
         buttonInitialize();
         initializePanel();
         setVisible(true);
     }
+
     public void buttonInitialize(){
         resetButton = new JButton("RESET");
 
@@ -49,8 +50,7 @@ public class ResetMastermind extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(resetButton == e.getSource()){
             gamePanel.quitGame();
-            gamePanel.startMastermind(new Mastermind());
+            gamePanel.startQuoridor(new Quoridor());
         }
     }
-
 }

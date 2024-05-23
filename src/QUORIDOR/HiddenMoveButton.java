@@ -2,53 +2,60 @@ package QUORIDOR;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class HiddenMoveButton extends JPanel implements ActionListener {
+public class HiddenMoveButton extends JPanel{
 
     private JButton hiddenButton;
-    public HiddenMoveButton() {
+    private int coordinationX;
+    private int coordinationY;
+
+    public HiddenMoveButton(int coordinationX,int coordinationY) {
+        this.coordinationX = coordinationX;
+        this.coordinationY = coordinationY;
         createButton();
     }
 
     public void createButton() {
-        this.setBackground(Color.LIGHT_GRAY);
-        this.setLayout(new GridBagLayout());
+        this.setBounds(10,10,46,46);
+        this.setBackground(Color.DARK_GRAY);
+        this.setLayout(null);
         this.setBorder(null);
         this.setFocusable(false);
         this.setVisible(false);
 
         initializeButton();
 
-        add(hiddenButton,getGBC());
+        add(hiddenButton);
     }
     public void initializeButton(){
         hiddenButton = new JButton();
-        hiddenButton.addActionListener(this);
-        hiddenButton.setSize(15,15);
+
+        hiddenButton.setBounds(5,5,36,36);
         hiddenButton.setBorder(null);
         hiddenButton.setFocusable(false);
-        hiddenButton.setBackground(new Color(119, 173, 196));
-    }
-    public GridBagConstraints getGBC(){
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(0, 0, 0, 0);
-        return gbc;
+        hiddenButton.setBackground(new Color(52, 255, 223, 255));
+        hiddenButton.setVisible(true);
     }
 
+
+    public void addActionListener(ActionListener actionListener){
+        hiddenButton.addActionListener(actionListener);
+    }
 
     public void setVisibleButton(boolean bool){
         setVisible(bool);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    public int getCoordinationX() {
+        return coordinationX;
+    }
 
+    public int getCoordinationY() {
+        return coordinationY;
+    }
+
+    public JButton getHiddenButton(){
+        return this.hiddenButton;
     }
 }

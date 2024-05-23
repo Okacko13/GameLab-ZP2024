@@ -34,4 +34,8 @@ public class MoveButton extends JPanel {
         moveButton.setVisible(true);
     }
 
+    public JButton getMoveButton(){
+        return moveButton;
+    }
+
 }

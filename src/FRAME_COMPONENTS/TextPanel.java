@@ -31,7 +31,7 @@ public class TextPanel extends JPanel {
     public void initializePanel(){
         setSize(350,150);
         setLocation(400,0);
-        setBackground(Color.WHITE);
+        setBackground(Color.DARK_GRAY);
         setLayout(null);
 
         add(texPanel);

@@ -29,4 +29,8 @@ public class SidePanel extends JPanel {
         setVisible(true);
     }
 
+    public JButton getMoveButton(){
+        return moveButton.getMoveButton();
+    }
+
 }

@@ -2,13 +2,12 @@ package QUORIDOR;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class Field extends JPanel implements ActionListener {
+public class Field extends JPanel {
 
     private Player player;
     private GameField gameField;
+    private HiddenMoveButton moveButton;
 
     public Field(GameField gameField) {
         this.gameField = gameField;
@@ -26,14 +25,18 @@ public class Field extends JPanel implements ActionListener {
 
     public void addPlayer(Player player){
         this.player = player;
+        add(player);
+    }
+    public void addMoveButton(HiddenMoveButton moveButton){
+        this.moveButton = moveButton;
+        add(moveButton);
     }
 
     public void removePlayer(){
         this.player = null;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
+    public Player getPlayer() {
+        return player;
     }
 }

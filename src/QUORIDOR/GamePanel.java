@@ -42,47 +42,51 @@ public class GamePanel extends JPanel {
 
     public void initializeWalls(){
         verticalWalls = new Wall[9][8];
-        int coordinationX = 0;
-        int coordinationY = 0;
+
+        double coordinationX;
+        double coordinationY;
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 8; j++) {
 
-                coordinationX = 66;
-                coordinationY = 63;
+                coordinationX = 66.66;
+                coordinationY = 66.66;
 
                 coordinationX = (coordinationX + coordinationX * j) - 5;
-                coordinationY = coordinationY * i;
+                coordinationY = (coordinationY * i) - (i * 5);
+
+                int resultX = (int) Math.round(coordinationX);
+                int resultY = (int) Math.round(coordinationY);
 
                 verticalWalls[i][j] = new Wall();
                 verticalWalls[i][j].setDirection(WallDirection.VERTICAL);
-                verticalWalls[i][j].setPlace(coordinationX,coordinationY);
+                verticalWalls[i][j].setPlace(resultX,resultY);
                 add(verticalWalls[i][j]);
 
             }
         }
-        /*
-
 
         horizontalWalls = new Wall[8][9];
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 9; j++) {
 
-                coordinationX = 66;
-                coordinationY = 66;
+                coordinationX = 66.66;
+                coordinationY = 66.66;
 
-                coordinationX = coordinationX * i;
-                coordinationY = coordinationY * j;
+                coordinationX = (coordinationX * j);
+                coordinationY = (coordinationY + coordinationY * i) - (5 * ( i+ 1 ));
+
+                int resultX = (int) Math.round(coordinationX);
+                int resultY = (int) Math.round(coordinationY);
 
                 horizontalWalls[i][j] = new Wall();
                 horizontalWalls[i][j].setDirection(WallDirection.HORIZONTAL);
-                horizontalWalls[i][j].setPlace(coordinationX,coordinationY);
+                horizontalWalls[i][j].setPlace(resultX,resultY);
                 add(horizontalWalls[i][j]);
 
             }
         }
-        */
     }
 
     public void initializeGameField(Player player1, Player player2){

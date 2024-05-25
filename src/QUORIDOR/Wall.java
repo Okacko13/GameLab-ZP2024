@@ -20,11 +20,14 @@ public class Wall extends JPanel {
     public void initializePanel(){
         this.setLayout(new BorderLayout());
         this.setBackground(Color.DARK_GRAY);
+        setVisible(false);
 
     }
     public void initializeWallButton(){
         placeWall = new JButton();
         placeWall.setBackground(new Color(128, 74, 0));
+        placeWall.setFocusable(false);
+        placeWall.setBorder(BorderFactory.createLineBorder(Color.BLACK,1,true));
         add(placeWall);
     }
     public void setPlace(int coordinationX, int coordinationY){

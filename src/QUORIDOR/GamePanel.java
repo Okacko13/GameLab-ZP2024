@@ -8,11 +8,12 @@ public class GamePanel extends JPanel {
 
     private GameField gameField;
     private HiddenMoveButton[][] hiddenButtons;
-
-    private ArrayList<int[]> indexShownButtons;
+    private ArrayList<int[]> indexShownButtons = new ArrayList<>();
+    private Wall[][] horizontalWalls;
+    private Wall[][] verticalWalls;
 
     public GamePanel() {
-        initializeShownArray();
+        initializeWalls();
     }
 
     public void initializePanel(int width, int height, int x, int y,Player player1, Player player2){
@@ -38,8 +39,50 @@ public class GamePanel extends JPanel {
         }
 
     }
-    public void initializeShownArray(){
-        this.indexShownButtons = new ArrayList<>();
+
+    public void initializeWalls(){
+        verticalWalls = new Wall[9][8];
+        int coordinationX = 0;
+        int coordinationY = 0;
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 8; j++) {
+
+                coordinationX = 66;
+                coordinationY = 63;
+
+                coordinationX = (coordinationX + coordinationX * j) - 5;
+                coordinationY = coordinationY * i;
+
+                verticalWalls[i][j] = new Wall();
+                verticalWalls[i][j].setDirection(WallDirection.VERTICAL);
+                verticalWalls[i][j].setPlace(coordinationX,coordinationY);
+                add(verticalWalls[i][j]);
+
+            }
+        }
+        /*
+
+
+        horizontalWalls = new Wall[8][9];
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 9; j++) {
+
+                coordinationX = 66;
+                coordinationY = 66;
+
+                coordinationX = coordinationX * i;
+                coordinationY = coordinationY * j;
+
+                horizontalWalls[i][j] = new Wall();
+                horizontalWalls[i][j].setDirection(WallDirection.HORIZONTAL);
+                horizontalWalls[i][j].setPlace(coordinationX,coordinationY);
+                add(horizontalWalls[i][j]);
+
+            }
+        }
+        */
     }
 
     public void initializeGameField(Player player1, Player player2){

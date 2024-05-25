@@ -11,11 +11,10 @@ public class GameField extends JPanel implements ActionListener {
     private Player player1;
     private Player player2;
     private Field[][] fieldArray;
-
     private Quoridor quoridor;
     private HiddenMoveButton[][] hiddenMoveButtons;
-
     private GamePanel gamePanel;
+
 
     public GameField(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -38,6 +37,8 @@ public class GameField extends JPanel implements ActionListener {
             }
         }
     }
+
+
     public void addMoveButtonByIndex(int coordinationX,int coordinationY,HiddenMoveButton moveButton){
         fieldArray[coordinationY][coordinationX].addMoveButton(moveButton);
     }

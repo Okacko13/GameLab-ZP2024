@@ -8,9 +8,13 @@ public class Field extends JPanel {
     private Player player;
     private GameField gameField;
     private HiddenMoveButton moveButton;
+    private int coordinnationX;
+    private int coordinationY;
 
-    public Field(GameField gameField) {
+    public Field(GameField gameField,int coordinnationX, int coordinationY) {
         this.gameField = gameField;
+        this.coordinnationX = coordinnationX;
+        this.coordinationY = coordinationY;
         initialize();
     }
 

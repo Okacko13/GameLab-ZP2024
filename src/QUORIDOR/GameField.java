@@ -31,7 +31,7 @@ public class GameField extends JPanel implements ActionListener {
         fieldArray =  new Field[9][9];
         for(int i = 0; i < 9; i++){
             for (int j = 0; j < 9; j++) {
-                fieldArray[i][j] = new Field(this);
+                fieldArray[i][j] = new Field(this,j,i);
                 add(fieldArray[i][j]);
                 fieldArray[i][j].setVisibility(true);
             }

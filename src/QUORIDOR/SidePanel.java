@@ -33,4 +33,7 @@ public class SidePanel extends JPanel {
         return moveButton.getMoveButton();
     }
 
+    public JButton getPlaceWallButton() {
+        return placeWallButton.getPlaceWallButton();
+    }
 }

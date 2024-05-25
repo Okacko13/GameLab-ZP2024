@@ -2,8 +2,10 @@ package QUORIDOR;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Wall extends JPanel {
+public class Wall extends JPanel implements ActionListener {
 
     private WallDirection direction;
     private Field blocked1;
@@ -28,20 +30,11 @@ public class Wall extends JPanel {
         placeWall.setBackground(new Color(128, 74, 0));
         placeWall.setFocusable(false);
         placeWall.setBorder(BorderFactory.createLineBorder(Color.BLACK,1,true));
+        placeWall.addActionListener(this);
         add(placeWall);
     }
     public void setPlace(int coordinationX, int coordinationY){
         this.setLocation(coordinationX,coordinationY);
-    }
-    public void placeWall(Field field1,Field field2){
-        placeWall.setVisible(false);
-        this.setBackground(new Color(128, 74, 0));
-
-        placed = true;
-
-        this.blocked1 = field1;
-        this.blocked2 = field2;
-
     }
 
     public WallDirection getDirection() {
@@ -56,6 +49,9 @@ public class Wall extends JPanel {
             this.setSize(66,10);
         }
     }
+    public void visibleWall(boolean bool){
+        setVisible(bool);
+    }
 
     public void setBlocked1(Field blocked1) {
         this.blocked1 = blocked1;
@@ -65,7 +61,23 @@ public class Wall extends JPanel {
         this.blocked2 = blocked2;
     }
 
+    public boolean isPlaced() {
+        return placed;
+    }
+
     public void setPlaced(boolean placed) {
         this.placed = placed;
+        if(placed){
+            setVisible(true);
+            placeWall.setVisible(false);
+            this.setBackground(new Color(128, 74, 0));
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() ==  placeWall){
+            setPlaced(true);
+        }
     }
 }

@@ -68,8 +68,15 @@ public class Quoridor extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if(e.getSource() == sidePanel.getMoveButton()){
+            gamePanel.setVisibleWalls(false);
             gamePanel.showHiddenMoveButtons(playerOnTurn);
+        }else if(e.getSource() == sidePanel.getPlaceWallButton()){
+            gamePanel.setVisibleWalls(true);
+            setVisible(false);
+
         }
+        setVisible(true);
     }
 }

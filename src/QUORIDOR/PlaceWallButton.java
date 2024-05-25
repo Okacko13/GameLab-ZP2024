@@ -35,4 +35,7 @@ public class PlaceWallButton extends JPanel {
         placeWallButton.setVisible(true);
     }
 
+    public JButton getPlaceWallButton() {
+        return placeWallButton;
+    }
 }

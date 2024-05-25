@@ -13,16 +13,16 @@ public class GamePanel extends JPanel {
     private Wall[][] verticalWalls;
 
     public GamePanel() {
-        initializeWalls();
     }
 
     public void initializePanel(int width, int height, int x, int y,Player player1, Player player2){
         setBounds(x,y,width,height);
         setBackground(Color.RED);
-
         setLayout(null);
+
         initializeGameField(player1,player2);
         initializeButtons();
+        initializeWalls();
 
         gameField.setHiddenMoveButtons(this.hiddenButtons);
 
@@ -87,6 +87,40 @@ public class GamePanel extends JPanel {
 
             }
         }
+
+        addFieldsToWalls();
+    }
+    public void addFieldsToWalls(){
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 8; j++) {
+                verticalWalls[i][j].setBlocked1(gameField.getFieldByIndex( j , i ));
+                verticalWalls[i][j].setBlocked2(gameField.getFieldByIndex( (j + 1) , i ));
+            }
+        }
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 9; j++) {
+                horizontalWalls[i][j].setBlocked1(gameField.getFieldByIndex(j,i));
+                horizontalWalls[i][j].setBlocked2(gameField.getFieldByIndex(j , ( i + 1 )));
+            }
+        }
+    }
+    public void setVisibleWalls(boolean bool){
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 9; j++) {
+                if(!horizontalWalls[i][j].isPlaced()){
+                    horizontalWalls[i][j].visibleWall(bool);
+                }
+            }
+        }
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 8; j++) {
+                verticalWalls[i][j].visibleWall(bool);
+            }
+        }
+        setVisible(false);
+        setVisible(true);
+
     }
 
     public void initializeGameField(Player player1, Player player2){

@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GameField extends JPanel implements ActionListener {
+public class GameField extends JLayeredPane implements ActionListener {
 
     private boolean firstPlayerOnTurn;
     private Player player1;
@@ -15,6 +15,8 @@ public class GameField extends JPanel implements ActionListener {
     private HiddenMoveButton[][] hiddenMoveButtons;
     private GamePanel gamePanel;
 
+    private int numberOfPlacedWalls = 0;
+
 
     public GameField(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -22,18 +24,21 @@ public class GameField extends JPanel implements ActionListener {
         initializeFields();
     }
     public void initializePanel(){
-        setLayout(new GridLayout(9,9));
+        setLayout(null);
         setBounds(0,0,600,562);
         setBackground(Color.BLACK);
     }
 
     public void initializeFields(){
         fieldArray =  new Field[9][9];
+
         for(int i = 0; i < 9; i++){
             for (int j = 0; j < 9; j++) {
+
                 fieldArray[i][j] = new Field(this,j,i);
-                add(fieldArray[i][j]);
                 fieldArray[i][j].setVisibility(true);
+                add(fieldArray[i][j],JLayeredPane.DEFAULT_LAYER);
+
             }
         }
     }
@@ -72,6 +77,41 @@ public class GameField extends JPanel implements ActionListener {
     public Field getFieldByIndex(int coordinationX, int coordinationY){
         return fieldArray[coordinationY][coordinationX];
     }
+    public void changePlayerOnTurn(){
+        if(firstPlayerOnTurn){
+            setFirstPlayerOnTurn(false);
+        } else {
+            setFirstPlayerOnTurn(true);
+        }
+    }
+    public void addWall(JPanel component){
+        add(component,JLayeredPane.MODAL_LAYER);
+    }
+    public void removeComponent(JPanel component){
+        remove(component);
+    }
+    public JPanel createWallDisplay(Wall wall1,Wall wall2){
+
+        JPanel wall = new JPanel();
+        wall.setBackground(new Color(128, 74, 0));
+
+        if(wall1.getDirection() == WallDirection.HORIZONTAL){
+            if(wall1.getXPlacement() < wall2.getXPlacement()){
+                wall.setBounds(wall1.getXPlacement(),wall1.getYPlacement(),130,10);
+            }else{
+                wall.setBounds(wall2.getXPlacement(),wall2.getYPlacement(),130,10);
+            }
+
+        } else if(wall1.getDirection() == WallDirection.VERTICAL) {
+            if(wall1.getYPlacement() < wall2.getYPlacement()){
+                wall.setBounds(wall1.getXPlacement(),wall1.getYPlacement(),10,128);
+            }else{
+                wall.setBounds(wall2.getXPlacement(),wall2.getYPlacement(),10,128);
+            }
+        }
+
+        return wall;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -90,12 +130,13 @@ public class GameField extends JPanel implements ActionListener {
                             fieldArray[player1.getCoordinationY()][player1.getCoordinationX()].removePlayer();
 
                             player1.moveCoordinationX(hiddenMoveButtons[i][j].getCoordinationX());
-                            player1.moveCoordinationY(hiddenMoveButtons[i][j].getCoordinationY());
+                            if(player1.moveCoordinationY(hiddenMoveButtons[i][j].getCoordinationY())) quoridor.setWin(true);
+
 
                             fieldArray[hiddenMoveButtons[i][j].getCoordinationY()][hiddenMoveButtons[i][j].getCoordinationX()].addPlayer(player1);
                             this.quoridor.setPlayer1(player1);
 
-                            this.quoridor.setPlayerOnTurn(player2);
+                            this.quoridor.changePlayerOnTurn();
 
                             setFirstPlayerOnTurn(false);
 
@@ -103,12 +144,13 @@ public class GameField extends JPanel implements ActionListener {
                             fieldArray[player2.getCoordinationY()][player2.getCoordinationX()].removePlayer();
 
                             player2.moveCoordinationX(hiddenMoveButtons[i][j].getCoordinationX());
-                            player2.moveCoordinationY(hiddenMoveButtons[i][j].getCoordinationY());
+                            if(player2.moveCoordinationY(hiddenMoveButtons[i][j].getCoordinationY())) quoridor.setWin(true);
+
 
                             fieldArray[hiddenMoveButtons[i][j].getCoordinationY()][hiddenMoveButtons[i][j].getCoordinationX()].addPlayer(player2);
                             this.quoridor.setPlayer2(player2);
 
-                            this.quoridor.setPlayerOnTurn(player1);
+                            this.quoridor.changePlayerOnTurn();
 
                             setFirstPlayerOnTurn(true);
 

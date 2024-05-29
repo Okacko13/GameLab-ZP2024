@@ -2,20 +2,22 @@ package QUORIDOR;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Player extends JPanel {
 
     private final Color color;
     private int numberOfWalls = 8;
-
     private int coordinationX;
     private int coordinationY;
+    private ArrayList<int[]> finalDestinations;
 
-    public Player(Color color, int coordinationX,int coordinationY) {
+    public Player(Color color, int coordinationX,int coordinationY,ArrayList<int[]> finalDestinations) {
         this.coordinationX = coordinationX;
         this.coordinationY = coordinationY;
-
         this.color = color;
+
+        this.finalDestinations = finalDestinations;
         initializePanel();
     }
 
@@ -25,7 +27,7 @@ public class Player extends JPanel {
         setBackground(color);
         setVisible(true);
     }
-    public int getNumebreOfWalls(){
+    public int getNumberOfWalls(){
         return numberOfWalls;
     }
 
@@ -49,9 +51,16 @@ public class Player extends JPanel {
         return coordinationY;
     }
 
-    public void moveCoordinationY(int move) {
+    public boolean moveCoordinationY(int move) {
         if(move - 1 == coordinationY || move + 1 == coordinationY || move == coordinationY || move - 2 == coordinationY || move + 2 == coordinationY ){
             this.coordinationY = move;
+
+            for (int i = 0; i < finalDestinations.size(); i++) {
+                if(coordinationY == finalDestinations.get(i)[1]){
+                    return true;
+                }
+            }
         }
+        return false;
     }
 }

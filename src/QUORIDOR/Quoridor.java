@@ -4,16 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Quoridor extends JPanel implements ActionListener {
     private Player playerOnTurn;
     private Player player1;
     private Player player2;
-
     private GamePanel gamePanel;
-
     private SidePanel sidePanel;
+    private boolean win;
 
     public Quoridor() {
         initializeMailPanel();
@@ -21,8 +21,9 @@ public class Quoridor extends JPanel implements ActionListener {
     }
 
     public void initializeMailPanel(){
-        player1 = new Player(new Color(255, 0, 0, 224),4,0);
-        player2 = new Player(new Color(255, 218, 0, 255),4,8);
+
+        player1 = new Player(new Color(255, 0, 0, 224),4,0, getFinalDestinationsPlayer1());
+        player2 = new Player(new Color(255, 218, 0, 255),4,8, getFinalDestinationsPlayer2());
 
         setSize(750,600);
         setLocation(0,0);
@@ -32,13 +33,32 @@ public class Quoridor extends JPanel implements ActionListener {
         sidePanel = new SidePanel();
         sidePanel.initializePanel(this);
 
-        gamePanel = new GamePanel();
+        gamePanel = new GamePanel(this);
         gamePanel.initializePanel(600,600,0,0,player1,player2);
         gamePanel.getGameField().setQuoridor(this);
 
         add(sidePanel);
         add(gamePanel);
+
         setVisible(true);
+    }
+    public ArrayList<int[]> getFinalDestinationsPlayer1(){
+        ArrayList<int[]> finalDestinations = new ArrayList<>();
+        for(int i = 0; i < 9; i++){
+            int[] destination = {i,8};
+            finalDestinations.add(destination);
+        }
+
+        return finalDestinations;
+    }
+    public ArrayList<int[]> getFinalDestinationsPlayer2(){
+        ArrayList<int[]> finalDestinations = new ArrayList<>();
+        for(int i = 0; i < 9; i++){
+            int[] destination = {i,0};
+            finalDestinations.add(destination);
+        }
+
+        return finalDestinations;
     }
     public void setFirstPlayer(){
         Random random = new Random();
@@ -65,18 +85,46 @@ public class Quoridor extends JPanel implements ActionListener {
     public void setPlayerOnTurn(Player playerOnTurn) {
         this.playerOnTurn = playerOnTurn;
     }
+    public void changePlayerOnTurn(){
+
+        if(playerOnTurn == player1){
+
+            playerOnTurn = player2;
+        } else {
+
+            playerOnTurn = player1;
+
+        }
+    }
+
+    public Player getPlayerOnTurn() {
+        return playerOnTurn;
+    }
+
+    public void setWin(boolean win) {
+        this.win = win;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == sidePanel.getMoveButton()){
-            gamePanel.setVisibleWalls(false);
-            gamePanel.showHiddenMoveButtons(playerOnTurn);
-        }else if(e.getSource() == sidePanel.getPlaceWallButton()){
-            gamePanel.setVisibleWalls(true);
-            setVisible(false);
+        if(!win){
+            if(e.getSource() == sidePanel.getMoveButton()){
 
+                gamePanel.placeWalls(false);
+                gamePanel.showHiddenMoveButtons(playerOnTurn);
+
+            }else if(e.getSource() == sidePanel.getPlaceWallButton()){
+                if(playerOnTurn.getNumberOfWalls() != 0){
+
+                    gamePanel.hideHiddenMoveButtons();
+                    gamePanel.placeWalls(true);
+
+                }
+
+            }
         }
-        setVisible(true);
+
+
     }
 }

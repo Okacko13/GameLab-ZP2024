@@ -8,19 +8,21 @@ public class Field extends JPanel {
     private Player player;
     private GameField gameField;
     private HiddenMoveButton moveButton;
-    private int coordinnationX;
+    private int coordinationX;
     private int coordinationY;
 
-    public Field(GameField gameField,int coordinnationX, int coordinationY) {
+    public Field(GameField gameField,int coordinationX, int coordinationY) {
         this.gameField = gameField;
-        this.coordinnationX = coordinnationX;
+        this.coordinationX = coordinationX;
         this.coordinationY = coordinationY;
-        initialize();
+        initialize(coordinationX,coordinationY);
     }
 
-    public void initialize(){
+    public void initialize(int i,int j){
         setBorder(BorderFactory.createLineBorder(Color.BLACK,2));
         setBackground(Color.DARK_GRAY);
+        setForeground(Color.DARK_GRAY);
+        setBounds(calculateLocation(i,true),calculateLocation(j,false),66,66);
         setLayout(null);
     }
     public void setVisibility(boolean bool){
@@ -43,4 +45,20 @@ public class Field extends JPanel {
     public Player getPlayer() {
         return player;
     }
+
+    public static int calculateLocation(int number,boolean coordinationX){
+        double coordination;
+        if(coordinationX){
+            coordination = 66.66666 * number;
+        }else{
+            coordination = 62.44444 * number;
+        }
+
+
+        int result = (int) Math.round(coordination);
+
+        return result;
+
+    }
+
 }

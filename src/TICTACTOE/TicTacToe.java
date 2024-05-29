@@ -7,6 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+/**
+ * the whole game of Tic Tac Toe takes place in it
+ */
 public class TicTacToe extends JPanel implements ActionListener {
     private Random random = new Random();
     private final char player1 = 'X';
@@ -27,6 +30,9 @@ public class TicTacToe extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * initializes the buttons required for the game
+     */
     public void initializeButtons(){
         buttons = new JButton[3][3];
 
@@ -44,6 +50,9 @@ public class TicTacToe extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * generates which player will start the game
+     */
     public void firstTurn(){
         int generated = random.nextInt(2);
 
@@ -57,6 +66,10 @@ public class TicTacToe extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * checks if there are any winning combinations in the playing field
+     * @return text that will subsequently be applied to the panel text
+     */
     public String check(){
         if(turns > 4){
             //hotizontal
@@ -99,6 +112,15 @@ public class TicTacToe extends JPanel implements ActionListener {
         return null;
     }
 
+    /**
+     *takes the game to a state where one of the players has made a winning three of a kind
+     * @param rowOne coordination Y of first winning button
+     * @param colOne coordination X of first winning button
+     * @param rowTwo coordination Y of second winning button
+     * @param colTwo coordination X of second winning button
+     * @param rowThree coordination Y of third winning button
+     * @param colThree coordination X of third winning button
+     */
     public void win(int rowOne,int colOne,int rowTwo,int colTwo,int rowThree,int colThree){
 
         buttons[rowOne][colOne].setBackground(Color.GREEN);
@@ -113,6 +135,10 @@ public class TicTacToe extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     *registers the pressing of the button and places the symbols
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean turnDone = false;
@@ -154,6 +180,9 @@ public class TicTacToe extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     *creates an environment for a new game
+     */
     public void newGame(){
 
         for(int  i = 0; i < buttons.length ; i++){
@@ -166,10 +195,20 @@ public class TicTacToe extends JPanel implements ActionListener {
         firstTurn();
         turns = 0;
     }
+
+    /**
+     * method sets the button to the draw state
+     * @param button the button is put into a mode in which it cannot be played
+     */
     public void setTie(JButton button){
         textPanel.setTextOnPanel("TIE");
         button.setEnabled(false);
     }
+
+    /**
+     *basic textPanel setter
+     * @param textPanel
+     */
     public void setTextPanel(TextPanel textPanel) {
         this.textPanel = textPanel;
         textPanel.setSizeOfText(40);

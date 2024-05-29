@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Class that creates the ability to reset the Tic Tac Toe game
+ */
 public class ResetTicTacToeButton extends JPanel implements ActionListener {
 
     private JButton resetButton;
@@ -19,6 +22,9 @@ public class ResetTicTacToeButton extends JPanel implements ActionListener {
 
     }
 
+    /**
+     *sets the reset button for the game
+     */
     public void buttonInitialize(){
         resetButton = new JButton("RESET");
 
@@ -35,18 +41,29 @@ public class ResetTicTacToeButton extends JPanel implements ActionListener {
 
     }
 
+    /**
+     *initializes the panel where the restart button is located
+     */
     public void initializePanel(){
         this.setSize(200,150);
-        setLocation(200,0);
+        this.setLocation(200,0);
         this.setBackground(Color.DARK_GRAY);
         this.setLayout(null);
 
     }
 
+    /**
+     *basic setter
+     * @param ttt
+     */
     public void setTicTacToe(TicTacToe ttt){
         this.game = ttt;
     }
 
+    /**
+     *
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(resetButton == e.getSource()){

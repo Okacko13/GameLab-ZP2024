@@ -6,6 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Class that transfers graphical representation
+ * Most of the logic for the quoridor game is handled here
+ */
 public class GamePanel extends JPanel implements ActionListener {
     private GameField gameField;
     private HiddenMoveButton[][] hiddenButtons;
@@ -22,6 +26,15 @@ public class GamePanel extends JPanel implements ActionListener {
         this.quoridor = quoridor;
     }
 
+    /**
+     * Initializes the panel and most other elements of the class
+     * @param width sets the width
+     * @param height sets the height
+     * @param x sets location on x-axis
+     * @param y sets location on y-axis
+     * @param player1 sets player 1
+     * @param player2 sets player 2
+     */
     public void initializePanel(int width, int height, int x, int y,Player player1, Player player2){
         setBounds(x,y,width,height);
         setBackground(Color.BLACK);
@@ -46,6 +59,11 @@ public class GamePanel extends JPanel implements ActionListener {
         }
 
     }
+
+    /**
+     * Puts the walls in place
+     * @param bool
+     */
     public void placeWalls(boolean bool){
         gameField.setVisibleField(false);
 
@@ -81,6 +99,9 @@ public class GamePanel extends JPanel implements ActionListener {
         gameField.setVisibleField(true);
     }
 
+    /**
+     * Initializes the walls
+     */
     public void initializeWalls(){
         verticalWalls = new Wall[9][8];
 
@@ -132,6 +153,10 @@ public class GamePanel extends JPanel implements ActionListener {
         addFieldsToWalls();
 
     }
+
+    /**
+     * Assigns fields to the walls that will block
+     */
     public void addFieldsToWalls(){
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 8; j++) {
@@ -147,15 +172,29 @@ public class GamePanel extends JPanel implements ActionListener {
             }
         }
     }
+
+    /**
+     * Displays a wall on the screen
+     * @param wall
+     */
     public void displayWall(JPanel wall){
         gameField.addWall(wall);
     }
 
+    /**
+     * Initializes the GameField
+     * @param player1 Assigns GameField to player 1
+     * @param player2 Assigns GameField to player 2
+     */
     public void initializeGameField(Player player1, Player player2){
         gameField = new GameField(this);
         gameField.addPlayers(player1,player2);
         add(gameField);
     }
+
+    /**
+     * Hides the buttons for movement
+     */
     public void hideHiddenMoveButtons(){
 
         for(int i = 0; i < indexShownButtons.size(); i++){
@@ -165,12 +204,23 @@ public class GamePanel extends JPanel implements ActionListener {
         }
 
     }
+
+    /**
+     * Adds a wall to the temporary arrayList
+     * When the temporary ArrayList is of size two, the method performs a wall check
+     * @param wall Added wall to temporary arrayList
+     */
     public void addWallTemporary(Wall wall){
         temporaryWallPlace.add(wall);
         if(temporaryWallPlace.size() == 2){
             this.placeTemporaryWalls();
         }
     }
+
+    /**
+     * Check if the walls in the temporary arrayList are adjacent to each other
+     * @return Returns true when they are next to each other and false when they are not next to each other
+     */
     public boolean checkTemporaryWallArray(){
         if(temporaryWallPlace.get(0).getDirection() == temporaryWallPlace.get(1).getDirection()){
 
@@ -194,6 +244,10 @@ public class GamePanel extends JPanel implements ActionListener {
         }
         return false;
     }
+
+    /**
+     * Creates a record of the addition of a new wall to the GameField and creates a graphic output on the screen
+     */
     public void placeTemporaryWalls(){
         int[] coordinationOfPlacedWall1;
         int[] coordinationOfPlacedWall2;
@@ -227,6 +281,14 @@ public class GamePanel extends JPanel implements ActionListener {
         temporaryWallPlace.remove(temporaryWallPlace.get(1));
         temporaryWallPlace.remove(temporaryWallPlace.get(0));
     }
+
+    /**
+     * Checks if there is a wall between fields start and end
+     * @param start Field that player is standing on
+     * @param end Field where player is going
+     * @return returns true if there is wall
+     * @return returns false if there is no wall
+     */
     public boolean checkVerticalWallPlaced(Field start,Field end){
         for (int i = 0; i < indexPlacedWallsVertical.size(); i++) {
             if(     (verticalWalls[indexPlacedWallsVertical.get(i)[1]][indexPlacedWallsVertical.get(i)[0]].getBlocked1() == start
@@ -241,6 +303,14 @@ public class GamePanel extends JPanel implements ActionListener {
 
         return false;
     }
+
+    /**
+     * Checks if there is a wall between fields start and end
+     * @param start Field that player is standing on
+     * @param end Field where player is going
+     * @return returns true if there is wall
+     * @return returns false if there is no wall
+     */
     public boolean checkHorizontalWallPlaced(Field start, Field end){
         for (int i = 0; i < indexPlacedWallsHorizontal.size(); i++) {
             if(     (horizontalWalls[indexPlacedWallsHorizontal.get(i)[1]][indexPlacedWallsHorizontal.get(i)[0]].getBlocked1() == start
@@ -255,6 +325,10 @@ public class GamePanel extends JPanel implements ActionListener {
         return false;
     }
 
+    /**
+     * Shows options where the player can move
+     * @param player The player for whom the options appear
+     */
     public void showHiddenMoveButtons(Player player){
         int coordinationX = player.getCoordinationX();
         int coordinationY = player.getCoordinationY();
@@ -329,10 +403,18 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * basic getter
+     * @return
+     */
     public GameField getGameField(){
         return this.gameField;
     }
 
+    /**
+     * Records which wall button has been pressed
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean done = false;

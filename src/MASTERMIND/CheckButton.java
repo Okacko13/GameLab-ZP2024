@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ *
+ */
 public class CheckButton extends JButton {
 
     private String text;
@@ -20,14 +23,19 @@ public class CheckButton extends JButton {
 
     }
 
+    /**
+     * basic setter
+     * @param s
+     */
     public void setTextButton(String s){
         setText(s);
         text = s;
     }
 
-    public void enableButton(Boolean bool){
-        setVisible(bool);
-    }
+    /**
+     * assigns the ActionListener to the button
+     * @param actionListener
+     */
     public void setActionListener(ActionListener actionListener){
         addActionListener(actionListener);
     }

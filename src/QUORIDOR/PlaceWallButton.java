@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Class containing a button for displaying walls on the playing field
+ */
 public class PlaceWallButton extends JPanel {
 
 
@@ -12,6 +15,10 @@ public class PlaceWallButton extends JPanel {
     public PlaceWallButton() {
     }
 
+    /**
+     * Creates a button with a background behind it
+     * @param actionListener
+     */
     public void createMoveButton(ActionListener actionListener){
         initializePanel();
         initializeButton(actionListener);
@@ -19,12 +26,19 @@ public class PlaceWallButton extends JPanel {
         setVisible(true);
     }
 
+    /**
+     * Initializes the panel on which the wall button is located
+     */
     public void initializePanel(){
         setBounds(0,250,150,250);
         setBackground(Color.DARK_GRAY);
         setLayout(null);
     }
 
+    /**
+     * Initializes the button for displaying walls
+     * @param actionListener
+     */
     public void initializeButton(ActionListener actionListener){
         placeWallButton = new JButton("WALL");
         placeWallButton.setFocusable(false);
@@ -35,6 +49,10 @@ public class PlaceWallButton extends JPanel {
         placeWallButton.setVisible(true);
     }
 
+    /**
+     * basic getter
+     * @return
+     */
     public JButton getPlaceWallButton() {
         return placeWallButton;
     }

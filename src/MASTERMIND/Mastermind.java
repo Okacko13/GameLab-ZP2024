@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Class where game Mastermind is being processed
+ */
 public class Mastermind extends JPanel implements ActionListener {
 
     private GamePhase gamePhase = GamePhase.SETTINGUP;
@@ -28,6 +31,9 @@ public class Mastermind extends JPanel implements ActionListener {
         setVisible(true);
     }
 
+    /**
+     * Set the main panel on which the game is subsequently played
+     */
     public void setMainPanel(){
         setSize(750,600);
         setLocation(0,0);
@@ -35,6 +41,9 @@ public class Mastermind extends JPanel implements ActionListener {
         setBackground(Color.DARK_GRAY);
     }
 
+    /**
+     * Initializes combo boxes important for the entire game
+     */
     public void initializeComboBox(){
         enterColors = new JComboBox[4];
         String[] colors = {"","YELLOW", "GREEN", "BLUE", "BLACK", "WHITE", "RED"};
@@ -45,10 +54,13 @@ public class Mastermind extends JPanel implements ActionListener {
         }
         newGameCheckBox();
     }
+
+    /**
+     * Sets the combo boxes important to the final form
+     */
     public void newGameCheckBox(){
 
         for(int i = 0; i < enterColors.length; i++){
-            enterColors[i].addActionListener(this);
             enterColors[i].setFont(new Font("Times new roman", Font.BOLD,17));
             enterColors[i].setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
             enterColors[i].setBackground(Color.LIGHT_GRAY);
@@ -62,6 +74,9 @@ public class Mastermind extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * Initializes the check button
+     */
     public void initializeCheckButton(){
         checkButton = new CheckButton();
         checkButton.setTextButton("DONE");
@@ -69,6 +84,9 @@ public class Mastermind extends JPanel implements ActionListener {
         add(checkButton);
     }
 
+    /**
+     * Sets the text panel
+     */
     public void textPanelSetUp(){
         textP = new JPanel();
         textP.setSize(750,100);
@@ -90,6 +108,9 @@ public class Mastermind extends JPanel implements ActionListener {
         add(textP);
     }
 
+    /**
+     * In the setting phase, it enters the selected colours and transfers them to the Row settedPins
+     */
     public void setSettedPins(){
         if(gamePhase == GamePhase.SETTINGUP) {
             for (int i = 0; i < 4; i++) {
@@ -118,6 +139,10 @@ public class Mastermind extends JPanel implements ActionListener {
             }
         }
     }
+
+    /**
+     * Takes the game into the guessing phase
+     */
     public void setQuessingPhase(){
         enterColors[0].setBounds(80,10,100,40);
         enterColors[1].setBounds(240,10,100,40);
@@ -126,7 +151,7 @@ public class Mastermind extends JPanel implements ActionListener {
 
         setEnteredColorsSetSelectedIndex(0);
         textLabel.setText("↑ enter your guess ↑");
-        checkButton.setTextButton("GUES");
+        checkButton.setTextButton("GUESS");
         checkButton.setLocation(275,510);
 
         guessedPins = new Row[10];
@@ -134,12 +159,21 @@ public class Mastermind extends JPanel implements ActionListener {
         textPanel.setTextOnPanel("Second player guesses");
 
     }
+
+    /**
+     * Displays an array in the combo box with the index that is specified
+     * @param index index that determines which field will be seen
+     */
     public void setEnteredColorsSetSelectedIndex(int index){
         for(int i = 0; i < enterColors.length; i++){
             enterColors[i].setSelectedIndex(index);
         }
     }
-    public void ques(){
+
+    /**
+     * method for transferring a guess to a row
+     */
+    public boolean gues(){
         if(numberOfGueses < 10){
             guessedPins[numberOfGueses] = new Row();
             guessedPins[numberOfGueses].initializePinDisplays();
@@ -175,23 +209,33 @@ public class Mastermind extends JPanel implements ActionListener {
                 }
             }
 
-            guessedPins[numberOfGueses].setLocationPinDisplays(numberOfGueses);
-            guessedPins[numberOfGueses].setVisiblePinDisplay(true);
-            guessedPins[numberOfGueses].createVisibleRow(numberOfGueses);
+            if(guessedPins[numberOfGueses].numberOfColoredPins(guessedPins[numberOfGueses]) == 4){
 
-            add(guessedPins[numberOfGueses].getRowPanel());
+                guessedPins[numberOfGueses].setLocationPinDisplays();
+                guessedPins[numberOfGueses].setVisiblePinDisplay(true);
+                guessedPins[numberOfGueses].createVisibleRow(numberOfGueses);
 
-            setEnteredColorsSetSelectedIndex(0);
-            numberOfGueses++;
+                add(guessedPins[numberOfGueses].getRowPanel());
 
-            if(numberOfGueses == 1){
-                textP.setVisible(false);
+                setEnteredColorsSetSelectedIndex(0);
+                numberOfGueses++;
+
+                if(numberOfGueses == 1){
+                    textP.setVisible(false);
+                }
+
+                setVisible(false);
+
+                return true;
             }
-
-            setVisible(false);
         }
+        return false;
     }
 
+    /**
+     * Processes the entered colours
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(!win){
@@ -200,19 +244,28 @@ public class Mastermind extends JPanel implements ActionListener {
                     settedPins = new Row();
                     setSettedPins();
                 } else if(gamePhase == GamePhase.QUESSING){
-                    ques();
-                    guessedPins[numberOfGueses-1].check(settedPins);
-                    if(guessedPins[numberOfGueses-1].hasRowSimilarPins(settedPins)){
-                        win = true;
-                        textPanel.setTextOnPanel("Guess is correct");
 
+                    if(gues()) {
+
+                        guessedPins[numberOfGueses - 1].check(settedPins);
+                        if(guessedPins[numberOfGueses - 1].hasRowSimilarPins(settedPins)){
+                            win = true;
+                            textPanel.setTextOnPanel("Guess is correct");
+
+                        }
                     }
+
+
                     setVisible(true);
                 }
             }
         }
     }
 
+    /**
+     * Basic textPanel setter
+     * @param textPanel
+     */
     public void setTextPanel(TextPanel textPanel){
         this.textPanel = textPanel;
         textPanel.setSizeOfText(23);

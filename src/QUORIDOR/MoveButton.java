@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Class that displays hidden buttons for movement
+ */
 public class MoveButton extends JPanel {
 
     private JButton moveButton;
@@ -11,6 +14,10 @@ public class MoveButton extends JPanel {
     public MoveButton() {
     }
 
+    /**
+     * Creates a button
+     * @param actionListener
+     */
     public void createMoveButton(ActionListener actionListener){
         initializePanel();
         initializeButton(actionListener);
@@ -18,12 +25,19 @@ public class MoveButton extends JPanel {
         setVisible(true);
     }
 
+    /**
+     * Initializes the panel on which the button will be located
+     */
     public void initializePanel(){
         setBounds(0,0,150,250);
         setBackground(Color.DARK_GRAY);
         setLayout(null);
     }
 
+    /**
+     * Initializes the button
+     * @param actionListener
+     */
     public void initializeButton(ActionListener actionListener){
         moveButton = new JButton("MOVE");
         moveButton.setFocusable(false);
@@ -34,6 +48,10 @@ public class MoveButton extends JPanel {
         moveButton.setVisible(true);
     }
 
+    /**
+     *
+     * @return
+     */
     public JButton getMoveButton(){
         return moveButton;
     }

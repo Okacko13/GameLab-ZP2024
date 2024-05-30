@@ -5,6 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This is where most of the game is processed
+ * Includes the playing field and working with the players
+ */
 public class GameField extends JLayeredPane implements ActionListener {
 
     private boolean firstPlayerOnTurn;
@@ -23,12 +27,19 @@ public class GameField extends JLayeredPane implements ActionListener {
         initializePanel();
         initializeFields();
     }
+
+    /**
+     * Initializes the panel on which the graphic output is subsequently located
+     */
     public void initializePanel(){
         setLayout(null);
         setBounds(0,0,600,562);
         setBackground(Color.BLACK);
     }
 
+    /**
+     * Initializes the playing field
+     */
     public void initializeFields(){
         fieldArray =  new Field[9][9];
 
@@ -43,10 +54,20 @@ public class GameField extends JLayeredPane implements ActionListener {
         }
     }
 
-
+    /**
+     * Assigns hidden move buttons to fields
+     * @param coordinationX
+     * @param coordinationY
+     * @param moveButton
+     */
     public void addMoveButtonByIndex(int coordinationX,int coordinationY,HiddenMoveButton moveButton){
         fieldArray[coordinationY][coordinationX].addMoveButton(moveButton);
     }
+
+    /**
+     * basic setter
+     * @param bool
+     */
     public void setVisibleField(boolean bool){
         setVisible(bool);
     }
@@ -58,6 +79,10 @@ public class GameField extends JLayeredPane implements ActionListener {
         fieldArray[8][4].addPlayer(player2);
     }
 
+    /**
+     * Sets hidden buttons for movement
+     * @param hiddenMoveButtons
+     */
     public void setHiddenMoveButtons(HiddenMoveButton[][] hiddenMoveButtons){
         this.hiddenMoveButtons = hiddenMoveButtons;
         for (HiddenMoveButton[] hiddenMoveButton : hiddenMoveButtons) {
@@ -66,6 +91,7 @@ public class GameField extends JLayeredPane implements ActionListener {
             }
         }
     }
+
     public void setFirstPlayerOnTurn(boolean bool){
         this.firstPlayerOnTurn = bool;
     }
@@ -74,9 +100,19 @@ public class GameField extends JLayeredPane implements ActionListener {
         this.quoridor = quoridor;
     }
 
+    /**
+     * Returns a field according to the given coordinate
+     * @param coordinationX
+     * @param coordinationY
+     * @return Returns the given field
+     */
     public Field getFieldByIndex(int coordinationX, int coordinationY){
         return fieldArray[coordinationY][coordinationX];
     }
+
+    /**
+     * Transfers the game to the other player
+     */
     public void changePlayerOnTurn(){
         if(firstPlayerOnTurn){
             setFirstPlayerOnTurn(false);
@@ -84,12 +120,30 @@ public class GameField extends JLayeredPane implements ActionListener {
             setFirstPlayerOnTurn(true);
         }
     }
+
+    /**
+     * Adds panel to the main panel
+     * @param component Panel we want to add
+     */
     public void addWall(JPanel component){
         add(component,JLayeredPane.MODAL_LAYER);
     }
+
+    /**
+     * Removes panels from the main panel
+     * @param component The panel we want to remove
+     */
+
     public void removeComponent(JPanel component){
         remove(component);
     }
+
+    /**
+     * Creates a permanent representation of the laid wall
+     * @param wall1 The first wall from which the subsequent wall is formed
+     * @param wall2 The second wall from which the subsequent wall is formed
+     * @return The panel that will be subsequently added for graphic output to the monitor
+     */
     public JPanel createWallDisplay(Wall wall1,Wall wall2){
 
         JPanel wall = new JPanel();
@@ -113,6 +167,10 @@ public class GameField extends JLayeredPane implements ActionListener {
         return wall;
     }
 
+    /**
+     * Processes attempted player movement
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean operationDone = false;
@@ -130,29 +188,44 @@ public class GameField extends JLayeredPane implements ActionListener {
                             fieldArray[player1.getCoordinationY()][player1.getCoordinationX()].removePlayer();
 
                             player1.moveCoordinationX(hiddenMoveButtons[i][j].getCoordinationX());
-                            if(player1.moveCoordinationY(hiddenMoveButtons[i][j].getCoordinationY())) quoridor.setWin(true);
 
+                            if(player1.moveCoordinationY(hiddenMoveButtons[i][j].getCoordinationY())) {
+                                quoridor.setWin(true);
+                                quoridor.getTextPanel().setSizeOfText(30);
+                                quoridor.getTextPanel().setTextOnPanel("Player 1 is winner");
+                                fieldArray[hiddenMoveButtons[i][j].getCoordinationY()][hiddenMoveButtons[i][j].getCoordinationX()].addPlayer(player1);
 
-                            fieldArray[hiddenMoveButtons[i][j].getCoordinationY()][hiddenMoveButtons[i][j].getCoordinationX()].addPlayer(player1);
-                            this.quoridor.setPlayer1(player1);
+                            } else {
 
-                            this.quoridor.changePlayerOnTurn();
+                                fieldArray[hiddenMoveButtons[i][j].getCoordinationY()][hiddenMoveButtons[i][j].getCoordinationX()].addPlayer(player1);
+                                this.quoridor.setPlayer1(player1);
 
-                            setFirstPlayerOnTurn(false);
+                                this.quoridor.changePlayerOnTurn();
+
+                                setFirstPlayerOnTurn(false);
+                            }
 
                         } else {
+
                             fieldArray[player2.getCoordinationY()][player2.getCoordinationX()].removePlayer();
 
                             player2.moveCoordinationX(hiddenMoveButtons[i][j].getCoordinationX());
-                            if(player2.moveCoordinationY(hiddenMoveButtons[i][j].getCoordinationY())) quoridor.setWin(true);
 
+                            if(player2.moveCoordinationY(hiddenMoveButtons[i][j].getCoordinationY())){
+                                quoridor.setWin(true);
+                                quoridor.getTextPanel().setSizeOfText(30);
+                                quoridor.getTextPanel().setTextOnPanel("Player 2 is winner");
+                                fieldArray[hiddenMoveButtons[i][j].getCoordinationY()][hiddenMoveButtons[i][j].getCoordinationX()].addPlayer(player2);
 
-                            fieldArray[hiddenMoveButtons[i][j].getCoordinationY()][hiddenMoveButtons[i][j].getCoordinationX()].addPlayer(player2);
-                            this.quoridor.setPlayer2(player2);
+                            } else {
 
-                            this.quoridor.changePlayerOnTurn();
+                                fieldArray[hiddenMoveButtons[i][j].getCoordinationY()][hiddenMoveButtons[i][j].getCoordinationX()].addPlayer(player2);
+                                this.quoridor.setPlayer2(player2);
 
-                            setFirstPlayerOnTurn(true);
+                                this.quoridor.changePlayerOnTurn();
+
+                                setFirstPlayerOnTurn(true);
+                            }
 
                         }
                         gamePanel.hideHiddenMoveButtons();

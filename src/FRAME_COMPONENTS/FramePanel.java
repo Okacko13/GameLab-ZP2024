@@ -10,6 +10,9 @@ import TICTACTOE.TicTacToe;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Creates a panel on which everything is on when you start one of the games
+ */
 public class FramePanel extends JPanel {
 
     private GamePanel gamePanel;
@@ -34,9 +37,17 @@ public class FramePanel extends JPanel {
         setFramePanel();
     }
 
+    /**
+     * Adjusts the visibility of the panel
+     * @param bool
+     */
     public void setVisibility(boolean bool){
         setVisible(bool);
     }
+
+    /**
+     * sets the top, which includes Reset Button, Lobby Button and Text Panel
+     */
     public void setTop(){
 
         top = new JPanel();
@@ -49,12 +60,20 @@ public class FramePanel extends JPanel {
 
         this.add(top,BorderLayout.NORTH);
     }
+
+    /**
+     * Sets main panel
+     */
     public void setFramePanel(){
         setBounds(0,0,750,750);
         setLayout(new BorderLayout());
         setVisible(false);
     }
 
+    /**
+     * Starts a game of Tic Tac Toe
+     * @param ticTacToe
+     */
     public void startTicTacToe(TicTacToe ticTacToe){
 
         top.add(resetTTT);
@@ -71,6 +90,11 @@ public class FramePanel extends JPanel {
         setVisibility(true);
 
     }
+
+    /**
+     * Starts a game Mastermind
+     * @param mastermind
+     */
     public void startMastermind(Mastermind mastermind){
 
         top.add(resetMastermind);
@@ -85,10 +109,17 @@ public class FramePanel extends JPanel {
 
         setVisibility(true);
     }
+
+    /**
+     * Starts a game Quoridor
+     * @param quoridor
+     */
     public void startQuoridor(Quoridor quoridor){
 
         top.add(resetQuoridor);
 
+        quoridor.setTextPanel(this.textPanel);
+        quoridor.setFirstPlayer();
         gamePanel.startQuoridor(quoridor);
         gamePanel.setVisibility(true);
 
@@ -98,6 +129,9 @@ public class FramePanel extends JPanel {
         setVisibility(true);
     }
 
+    /**
+     * Shuts down the game and puts the panel in a state where it is ready to accept a new game
+     */
     public void quitGame(){
 
         switch (gamePanel.getGame()){

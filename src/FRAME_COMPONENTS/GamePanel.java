@@ -7,6 +7,9 @@ import TICTACTOE.TicTacToe;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Displays the game itself
+ */
 public class GamePanel extends JPanel {
 
     private GamePlaying gamePlaying;
@@ -18,6 +21,9 @@ public class GamePanel extends JPanel {
         setUpPanel();
     }
 
+    /**
+     * Sets the panel on which the game will run
+     */
     public void setUpPanel(){
         setBounds(0,150,750,600);
         setLayout(new BorderLayout());
@@ -26,9 +32,17 @@ public class GamePanel extends JPanel {
         gamePlaying = GamePlaying.NONE;
     }
 
+    /**
+     * Mediates the visibility of the panel
+     * @param bool
+     */
     public void setVisibility(boolean bool){
         setVisible(bool);
     }
+
+    /**
+     * Removes games from the panel when switching to lobbies
+     */
     public void removeGame(){
 
         switch (gamePlaying){
@@ -50,6 +64,10 @@ public class GamePanel extends JPanel {
 
     }
 
+    /**
+     * Starts a game of Tic Tac Toe
+     * @param ticTacToe
+     */
     public void startTicTacToe(TicTacToe ticTacToe){
 
         gamePlaying = GamePlaying.TICTACTOE;
@@ -60,6 +78,11 @@ public class GamePanel extends JPanel {
         add(ticTacToe);
 
     }
+
+    /**
+     * Starts the game Mastermind
+     * @param mastermind
+     */
     public void startMastermind(Mastermind mastermind){
 
         gamePlaying = GamePlaying.MASTERMIND;
@@ -69,6 +92,11 @@ public class GamePanel extends JPanel {
 
         add(mastermind);
     }
+
+    /**
+     * Starts the game Quoridor
+     * @param quoridor
+     */
     public void startQuoridor(Quoridor quoridor){
 
         gamePlaying = GamePlaying.QUORIDOR;
@@ -79,7 +107,10 @@ public class GamePanel extends JPanel {
 
     }
 
-
+    /**
+     * Returns information about which game is currently running on the panel
+     * @return Enum gamePlaying
+     */
     public GamePlaying getGame(){
         return this.gamePlaying;
     }

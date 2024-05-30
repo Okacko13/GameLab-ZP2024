@@ -2,6 +2,9 @@ package MASTERMIND;
 
 import java.awt.*;
 
+/**
+ * Class for storing colour values
+ */
 public class Pin {
 
     private Color color;
@@ -13,8 +16,17 @@ public class Pin {
         return color;
     }
 
+    /**
+     * Assigns a color to the pin. If the input is null, it gives it the color pink.
+     * @param color
+     */
     public void setColor(Color color) {
-        this.color = color;
+        if(color != null){
+            this.color = color;
+        }else{
+            this.color = Color.PINK;
+        }
+
     }
 
 }

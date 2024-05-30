@@ -8,11 +8,13 @@ import TICTACTOE.ResetTicTacToeButton;
 import TICTACTOE.TicTacToe;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Translates everything into a graphical presentation for the players
+ */
 public class Frame extends JFrame implements ActionListener {
 
     private JPanel titlePanel;
@@ -35,6 +37,9 @@ public class Frame extends JFrame implements ActionListener {
         settupFrame();
     }
 
+    /**
+     * Sets Frame
+     */
     public void settupFrame(){
 
         setTitle("Lobby");
@@ -54,11 +59,18 @@ public class Frame extends JFrame implements ActionListener {
         setVisible(true);
 
     }
+
+    /**
+     * sets the frame panel and adds it to the frame
+     */
     public void setUpFramePanel(){
         framePanel = new FramePanel(new GamePanel(),new TextPanel(),new ResetTicTacToeButton(),new ResetMastermind(), new ResetQuoridorButton(),new ResetButton(framePanel,this));
         add(framePanel);
     }
 
+    /**
+     * Sets the home buttons that players use to get into games
+     */
     public void settupButtons(){
 
         for(int i = 0; i < gameOpener.length; i++){
@@ -66,7 +78,7 @@ public class Frame extends JFrame implements ActionListener {
             gameOpener[i] = new JButton();
             gameOpener[i].addActionListener(this);
             gameOpener[i].setFocusable(false);
-            gameOpener[i].setBackground(new Color(255, 41, 41, 148));
+            gameOpener[i].setBackground(new Color(34, 215, 113, 148));
             gameOpener[i].setForeground(new Color(0, 0, 0));
             gameOpener[i].setFont(new Font("Times New Roman",Font.BOLD,20));
             gameOpener[i].setBorderPainted(true);
@@ -87,6 +99,9 @@ public class Frame extends JFrame implements ActionListener {
         this.add(gameOpener[2]);
     }
 
+    /**
+     * Sets the TitlePanel
+     */
     public void setTitlePanel(){
 
         titlePanel = new JPanel();
@@ -97,6 +112,9 @@ public class Frame extends JFrame implements ActionListener {
         this.add(titlePanel);
     }
 
+    /**
+     * Sets the TextField
+     */
     public void setTextField(){
         textField = new JLabel("Pick game");
         textField.setBackground(new Color(57, 57, 57));
@@ -108,29 +126,46 @@ public class Frame extends JFrame implements ActionListener {
         titlePanel.add(textField);
     }
 
+    /**
+     * Turns the buttons off or on
+     * @param bool
+     */
     public void enableGameOButtons(boolean bool){
         for(int i = 0; i < gameOpener.length; i++){
             gameOpener[i].setVisible(bool);
         }
     }
 
+    /**
+     * Turns on the game Tic Tac Toe
+     */
     public void startTicTacToeFramePanel(){
         framePanel.setVisibility(true);
         framePanel.startTicTacToe(new TicTacToe());
         enableGameOButtons(false);
     }
+
+    /**
+     * Turns on the game Mastermind
+     */
     public void startMastermind(){
         framePanel.setVisibility(true);
         framePanel.startMastermind(new Mastermind());
         enableGameOButtons(false);
     }
-
+    /**
+     * Turns on the game Quoridor
+     */
     public void startQuoridor(){
         framePanel.setVisibility(true);
         framePanel.startQuoridor(new Quoridor());
         enableGameOButtons(false);
     }
 
+    /**
+     * Records whether any of the buttons to turn on the game are pressed
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (gameOpener[0].equals(e.getSource())) {

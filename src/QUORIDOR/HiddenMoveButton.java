@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * A class that mediates the movement of players around the playing field
+ */
 public class HiddenMoveButton extends JPanel{
 
     private JButton hiddenButton;
@@ -16,6 +19,9 @@ public class HiddenMoveButton extends JPanel{
         createButton();
     }
 
+    /**
+     * Creates a panel and a button for movement
+     */
     public void createButton() {
         this.setBounds(10,10,46,46);
         this.setBackground(Color.DARK_GRAY);
@@ -28,6 +34,10 @@ public class HiddenMoveButton extends JPanel{
 
         add(hiddenButton);
     }
+
+    /**
+     * Initializes the button itself
+     */
     public void initializeButton(){
         hiddenButton = new JButton();
 
@@ -38,23 +48,42 @@ public class HiddenMoveButton extends JPanel{
         hiddenButton.setVisible(true);
     }
 
-
+    /**
+     * Basic setter
+     * @param actionListener
+     */
     public void addActionListener(ActionListener actionListener){
         hiddenButton.addActionListener(actionListener);
     }
 
+    /**
+     * Sets whether the button is visible
+     * @param bool
+     */
     public void setVisibleButton(boolean bool){
         setVisible(bool);
     }
 
+    /**
+     * Basic getter
+     * @return
+     */
     public int getCoordinationX() {
         return coordinationX;
     }
 
+    /**
+     * Basic getter
+     * @return
+     */
     public int getCoordinationY() {
         return coordinationY;
     }
 
+    /**
+     * Basic getter
+     * @return
+     */
     public JButton getHiddenButton(){
         return this.hiddenButton;
     }

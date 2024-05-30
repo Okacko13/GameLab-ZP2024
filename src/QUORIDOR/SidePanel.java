@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Creates a side panel on which the moin control buttons are located
+ */
 public class SidePanel extends JPanel {
 
     private MoveButton moveButton;
@@ -13,6 +16,10 @@ public class SidePanel extends JPanel {
 
     }
 
+    /**
+     * Initializes the panel and its components
+     * @param actionListener
+     */
     public void initializePanel(ActionListener actionListener){
         moveButton = new MoveButton();
         placeWallButton = new PlaceWallButton();
@@ -29,10 +36,18 @@ public class SidePanel extends JPanel {
         setVisible(true);
     }
 
+    /**
+     * Returns button of moveButton class
+     * @return Button
+     */
     public JButton getMoveButton(){
         return moveButton.getMoveButton();
     }
 
+    /**
+     * Returns button of placeWallButton class
+     * @return Button
+     */
     public JButton getPlaceWallButton() {
         return placeWallButton.getPlaceWallButton();
     }

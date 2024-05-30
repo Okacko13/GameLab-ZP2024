@@ -78,7 +78,7 @@ public class Frame extends JFrame implements ActionListener {
             gameOpener[i] = new JButton();
             gameOpener[i].addActionListener(this);
             gameOpener[i].setFocusable(false);
-            gameOpener[i].setBackground(new Color(34, 215, 113, 148));
+            gameOpener[i].setBackground(new Color(34, 215, 113, 255));
             gameOpener[i].setForeground(new Color(0, 0, 0));
             gameOpener[i].setFont(new Font("Times New Roman",Font.BOLD,20));
             gameOpener[i].setBorderPainted(true);

@@ -47,7 +47,7 @@ public class ResetButton extends JPanel implements ActionListener {
     public void setUpResetB(){
         resetToLobby = new JButton("LOBBY");
         resetToLobby.setBounds(10,10,180,130);
-        resetToLobby.setBackground(new Color(34, 215, 113, 148));
+        resetToLobby.setBackground(new Color(34, 215, 113, 255));
         resetToLobby.setFont(new Font("Arial",Font.BOLD,40));
         resetToLobby.setForeground(Color.WHITE);
         resetToLobby.setFocusable(false);

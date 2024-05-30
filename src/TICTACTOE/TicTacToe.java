@@ -41,7 +41,7 @@ public class TicTacToe extends JPanel implements ActionListener {
                 buttons[i][j] = new JButton();
                 buttons[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK,3));
                 buttons[i][j].setVisible(true);
-                buttons[i][j].setBackground(Color.GRAY);
+                buttons[i][j].setBackground(Color.DARK_GRAY);
                 buttons[i][j].addActionListener(this);
                 buttons[i][j].setFocusable(false);
                 buttons[i][j].setFont(new Font("Arial",Font.BOLD,100));
@@ -106,7 +106,7 @@ public class TicTacToe extends JPanel implements ActionListener {
                         setTie(buttons[r][c]);
                     }
                 }
-                textPanel.setTextOnPanel("TIE");
+                return "TIE";
             }
         }
         return null;
@@ -157,14 +157,14 @@ public class TicTacToe extends JPanel implements ActionListener {
                         textPanel.setTextOnPanel(line);
                         if(turns<9){
                             if(onTurn == player1){
-                                buttons[i][j].setForeground(Color.BLUE);
+                                buttons[i][j].setForeground(new Color(255, 181, 194, 255));
                                 onTurn = player2;
                                 if(line == null) textPanel.setTextOnPanel(player2 + "´s turn");
                                 turnDone = true;
                                 break;
 
                             } else {
-                                buttons[i][j].setForeground(Color.RED);
+                                buttons[i][j].setForeground(new Color(42, 245, 255, 255));
                                 onTurn = player1;
                                 if(line == null) textPanel.setTextOnPanel(player1 + "´s turn");
                                 turnDone = true;
@@ -189,7 +189,7 @@ public class TicTacToe extends JPanel implements ActionListener {
             for (int j = 0; j < buttons.length; j++) {
                 buttons[i][j].setText("");
                 buttons[i][j].setEnabled(true);
-                buttons[i][j].setBackground(Color.GRAY);
+                buttons[i][j].setBackground(Color.DARK_GRAY);
             }
         }
         firstTurn();
@@ -201,7 +201,6 @@ public class TicTacToe extends JPanel implements ActionListener {
      * @param button the button is put into a mode in which it cannot be played
      */
     public void setTie(JButton button){
-        textPanel.setTextOnPanel("TIE");
         button.setEnabled(false);
     }
 

@@ -25,7 +25,7 @@ public class TextPanel extends JPanel {
 
         texPanel.setBounds(10,10,310,130);
 
-        texPanel.setBackground(new Color(34, 215, 113, 148));
+        texPanel.setBackground(new Color(34, 215, 113, 255));
         texPanel.setForeground(Color.WHITE);
         texPanel.setHorizontalAlignment(JLabel.CENTER);
         texPanel.setFont(new Font("Arial",Font.BOLD,40));

@@ -30,7 +30,7 @@ public class ResetQuoridorButton extends JPanel implements ActionListener {
         resetButton.setBounds(10,10,180,130);
         resetButton.setFont(new Font("Arial", Font.BOLD,40));
         resetButton.setFocusable(false);
-        resetButton.setBackground(new Color(34, 215, 113, 148));
+        resetButton.setBackground(new Color(34, 215, 113, 255));
         resetButton.setBorder(null);
         resetButton.setForeground(Color.WHITE);
         resetButton.addActionListener(this);

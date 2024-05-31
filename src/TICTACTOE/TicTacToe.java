@@ -70,7 +70,8 @@ public class TicTacToe extends JPanel implements ActionListener {
      * checks if there are any winning combinations in the playing field
      * @return text that will subsequently be applied to the panel text
      */
-    public String check(){
+    public String check(){ // !!! this method was inspired by this repository: https://github.com/ImKennyYip/tictactoe-java !!!
+
         if(turns > 4){
             //hotizontal
             for (int i = 0; i < 3; i++) {

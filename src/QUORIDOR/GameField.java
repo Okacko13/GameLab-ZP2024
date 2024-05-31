@@ -178,18 +178,20 @@ public class GameField extends JLayeredPane implements ActionListener {
             if(operationDone)break;
             for (int j = 0; j < hiddenMoveButtons.length; j++) {
 
-                if(!operationDone){
+                if(!operationDone){ // Break outer loop if operation is done
 
                     if(e.getSource().equals(hiddenMoveButtons[i][j].getHiddenButton())){
 
                         operationDone = true;
-                        if(firstPlayerOnTurn){
 
-                            fieldArray[player1.getCoordinationY()][player1.getCoordinationX()].removePlayer();
+                        if(firstPlayerOnTurn){ // Check if it's the first player's turn
 
-                            player1.moveCoordinationX(hiddenMoveButtons[i][j].getCoordinationX());
+                            fieldArray[player1.getCoordinationY()][player1.getCoordinationX()].removePlayer(); // Remove player 1 from current position
 
-                            if(player1.moveCoordinationY(hiddenMoveButtons[i][j].getCoordinationY())) {
+                            player1.moveCoordinationX(hiddenMoveButtons[i][j].getCoordinationX()); // Move player 1's X coordinate
+
+                            if(player1.moveCoordinationY(hiddenMoveButtons[i][j].getCoordinationY())) { // Move player 1's Y coordinate and check for win condition
+
                                 quoridor.setWin(true);
                                 quoridor.getTextPanel().setSizeOfText(30);
                                 quoridor.getTextPanel().setTextOnPanel("Player 1 is winner");
@@ -200,18 +202,19 @@ public class GameField extends JLayeredPane implements ActionListener {
                                 fieldArray[hiddenMoveButtons[i][j].getCoordinationY()][hiddenMoveButtons[i][j].getCoordinationX()].addPlayer(player1);
                                 this.quoridor.setPlayer1(player1);
 
-                                this.quoridor.changePlayerOnTurn();
+                                this.quoridor.changePlayerOnTurn(); // Change turn to next player
 
                                 setFirstPlayerOnTurn(false);
                             }
 
-                        } else {
+                        } else { // It's the second player's turn
 
-                            fieldArray[player2.getCoordinationY()][player2.getCoordinationX()].removePlayer();
+                            fieldArray[player2.getCoordinationY()][player2.getCoordinationX()].removePlayer();  // Remove player 2 from current position
 
                             player2.moveCoordinationX(hiddenMoveButtons[i][j].getCoordinationX());
 
-                            if(player2.moveCoordinationY(hiddenMoveButtons[i][j].getCoordinationY())){
+                            if(player2.moveCoordinationY(hiddenMoveButtons[i][j].getCoordinationY())){ // Move player 2's Y coordinate and check for win condition
+
                                 quoridor.setWin(true);
                                 quoridor.getTextPanel().setSizeOfText(30);
                                 quoridor.getTextPanel().setTextOnPanel("Player 2 is winner");
@@ -222,13 +225,13 @@ public class GameField extends JLayeredPane implements ActionListener {
                                 fieldArray[hiddenMoveButtons[i][j].getCoordinationY()][hiddenMoveButtons[i][j].getCoordinationX()].addPlayer(player2);
                                 this.quoridor.setPlayer2(player2);
 
-                                this.quoridor.changePlayerOnTurn();
+                                this.quoridor.changePlayerOnTurn(); // Change turn to next player
 
                                 setFirstPlayerOnTurn(true);
                             }
 
                         }
-                        gamePanel.hideHiddenMoveButtons();
+                        gamePanel.hideHiddenMoveButtons(); // Hide the move buttons
                         setVisibleField(false);
                         break;
                     }

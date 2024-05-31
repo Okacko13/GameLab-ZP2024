@@ -333,15 +333,15 @@ public class GamePanel extends JPanel implements ActionListener {
         int coordinationX = player.getCoordinationX();
         int coordinationY = player.getCoordinationY();
 
-        int i = 1;
+        int i = 1; // Helper variable
 
-        if(coordinationX < hiddenButtons.length && coordinationY < hiddenButtons.length && coordinationX > -1 && coordinationY > -1){
+        if(coordinationX < hiddenButtons.length && coordinationY < hiddenButtons.length && coordinationX > -1 && coordinationY > -1){ // Check if coordinates are within the bounds of the game board
 
-            if(coordinationY + 1 < hiddenButtons.length){
+            if(coordinationY + 1 < hiddenButtons.length){ // Check move up (north)
 
                 if(!checkHorizontalWallPlaced(gameField.getFieldByIndex(coordinationX,coordinationY),gameField.getFieldByIndex(coordinationX,coordinationY + 1))){
 
-                    if(gameField.getFieldByIndex(coordinationX,coordinationY + 1).getPlayer() != null) i++;
+                    if(gameField.getFieldByIndex(coordinationX,coordinationY + 1).getPlayer() != null) i++; // If there's a player, increment i
                     if(coordinationY + i < hiddenButtons.length){
 
                         hiddenButtons[coordinationY + i][coordinationX].setVisibleButton(true);
@@ -353,11 +353,11 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
 
             }
-            if(coordinationY - 1 > -1){
+            if(coordinationY - 1 > -1){ // Check move down (south)
 
                 if(!checkHorizontalWallPlaced(gameField.getFieldByIndex(coordinationX,coordinationY),gameField.getFieldByIndex(coordinationX,coordinationY - 1))){
 
-                    if(gameField.getFieldByIndex(coordinationX,coordinationY - 1).getPlayer() != null) i++;
+                    if(gameField.getFieldByIndex(coordinationX,coordinationY - 1).getPlayer() != null) i++; // If there's a player, increment i
                     if(coordinationY - i > -1) {
 
                         hiddenButtons[coordinationY - i][coordinationX].setVisibleButton(true);
@@ -369,11 +369,11 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
 
             }
-            if(coordinationX + 1 < hiddenButtons.length){
+            if(coordinationX + 1 < hiddenButtons.length){ // Check move right (east)
 
                 if(!checkVerticalWallPlaced(gameField.getFieldByIndex(coordinationX,coordinationY),gameField.getFieldByIndex(coordinationX + 1,coordinationY))){
 
-                    if(gameField.getFieldByIndex(coordinationX + 1,coordinationY).getPlayer() != null) i++;
+                    if(gameField.getFieldByIndex(coordinationX + 1,coordinationY).getPlayer() != null) i++; // If there's a player, increment i
                     if(coordinationX + i < hiddenButtons.length){
 
                         hiddenButtons[coordinationY][coordinationX + i].setVisibleButton(true);
@@ -385,11 +385,11 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
 
             }
-            if(coordinationX - 1 > -1){
+            if(coordinationX - 1 > -1){ // Check move left (west)
 
                 if(!checkVerticalWallPlaced(gameField.getFieldByIndex(coordinationX,coordinationY),gameField.getFieldByIndex(coordinationX-1,coordinationY))){
 
-                    if(gameField.getFieldByIndex(coordinationX - 1,coordinationY).getPlayer() != null) i++;
+                    if(gameField.getFieldByIndex(coordinationX - 1,coordinationY).getPlayer() != null) i++; // If there's a player, increment i
                     if(coordinationX - i > -1){
 
                         hiddenButtons[coordinationY][coordinationX - i].setVisibleButton(true);

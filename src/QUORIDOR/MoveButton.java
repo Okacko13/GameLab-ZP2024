@@ -29,7 +29,7 @@ public class MoveButton extends JPanel {
      * Initializes the panel on which the button will be located
      */
     public void initializePanel(){
-        setBounds(0,0,150,250);
+        setBounds(0,0,150,281);
         setBackground(Color.DARK_GRAY);
         setLayout(null);
     }
@@ -43,7 +43,7 @@ public class MoveButton extends JPanel {
         moveButton.setFocusable(false);
         moveButton.setBackground(Color.GRAY);
         moveButton.setBorder(null);
-        moveButton.setBounds(20,30,95,190);
+        moveButton.setBounds(20,30,95,221);
         moveButton.addActionListener(actionListener);
         moveButton.setVisible(true);
     }

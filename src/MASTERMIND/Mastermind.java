@@ -260,6 +260,10 @@ public class Mastermind extends JPanel implements ActionListener {
                 }
             }
         }
+        if(numberOfGueses == 10){
+            textPanel.setSizeOfText(30);
+            textPanel.setTextOnPanel("Game over player 2");
+        }
     }
 
     /**

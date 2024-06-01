@@ -170,7 +170,7 @@ public class Quoridor extends JPanel implements ActionListener {
 
                 gamePanel.placeWalls(false);
                 textPanel.setSizeOfText(30);
-                textPanel.setTextOnPanel(name + " is moving");
+                textPanel.setTextOnPanel(name + "is moving");
                 gamePanel.showHiddenMoveButtons(playerOnTurn);
 
 
@@ -179,7 +179,7 @@ public class Quoridor extends JPanel implements ActionListener {
 
                     gamePanel.hideHiddenMoveButtons();
                     textPanel.setSizeOfText(25);
-                    textPanel.setTextOnPanel(name + " is placing a wall");
+                    textPanel.setTextOnPanel(name + "is placing a wall");
                     gamePanel.placeWalls(true);
 
                 }
